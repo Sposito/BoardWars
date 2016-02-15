@@ -10,12 +10,9 @@ public class BuildBoard : MonoBehaviour {
 	public Color white = Color.white;
 	public Color black = Color.black;
 
-
 	Vector3 tileRight;
 	Vector3 tileDown;
 	Vector3 currentTile;
-
-
 
 	void Start () {
 		tileRight = new Vector3 (xSpacing, -ySpacing);
@@ -24,8 +21,7 @@ public class BuildBoard : MonoBehaviour {
 
 		Build ();
 	}
-
-
+		
 	private void Build(){
 
 		int rowCount = 0;
@@ -35,12 +31,8 @@ public class BuildBoard : MonoBehaviour {
 		string columns = "abcdefgh";
 		string rows = "12345678";
 
-		string name = "";
 		int nextRow = 7;
 		int nextColumn = 0;
-
-
-
 
 		GameObject currentGO;
 
@@ -58,8 +50,6 @@ public class BuildBoard : MonoBehaviour {
 				layerOrder += orderDirection;
 				//Define the  parameters which will define the next gameObject's name
 				nextColumn += orderDirection;
-
-
 			}
 			else{
 				//Defines where the next tile will be placed
@@ -72,18 +62,7 @@ public class BuildBoard : MonoBehaviour {
 				//Define the  parameters which will define the next gameObject's name
 				nextRow--;
 					// -> its making use of the orderDirection reversal executed in the aboves step
-
-
-
-
 			}
-
-
 		}
 	}
-
-
-
-
-
 }
