@@ -32,6 +32,15 @@ public class BuildBoard : MonoBehaviour {
 		int layerOrder = 0;
 		int orderDirection = 1;
 
+		string columns = "abcdefgh";
+		string rows = "12345678";
+
+		string name = "";
+		int nextRow = 7;
+		int nextColumn = 0;
+
+
+
 
 		GameObject currentGO;
 
@@ -39,13 +48,17 @@ public class BuildBoard : MonoBehaviour {
 			currentGO = (GameObject)Instantiate (tile, currentTile, Quaternion.identity);
 			currentGO.GetComponent<SpriteRenderer> ().sortingOrder = layerOrder;
 			currentGO.GetComponent<SpriteRenderer> ().color = (i % 2 == 0)? white:black;
-
+			currentGO.name = (columns [nextColumn] + "" + rows [nextRow]) ;
+			currentGO.transform.SetParent (transform);
 			if (rowCount < 7) {
 				//Defines where the next tile will be placed
 				currentTile += tileRight;
 				rowCount++;
-				//Define next tile LAyerOrder
+				//Define next tile LayerOrder
 				layerOrder += orderDirection;
+				//Define the  parameters which will define the next gameObject's name
+				nextColumn += orderDirection;
+
 
 			}
 			else{
@@ -56,6 +69,11 @@ public class BuildBoard : MonoBehaviour {
 				//Define next tile LayerOrder
 				layerOrder += 1;
 				orderDirection *= -1;
+				//Define the  parameters which will define the next gameObject's name
+				nextRow--;
+					// -> its making use of the orderDirection reversal executed in the aboves step
+
+
 
 
 			}
