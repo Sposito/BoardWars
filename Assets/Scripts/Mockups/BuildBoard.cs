@@ -67,4 +67,9 @@ public class BuildBoard : MonoBehaviour {
 	}
 
 
+
+	private Vector3 GetScenePosition(int x, int y){
+		return tileRight * x + tileDown * y;
+	}
+
 }

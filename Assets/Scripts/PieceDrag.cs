@@ -5,7 +5,7 @@ public class PieceDrag : MonoBehaviour {
 	
 	SpriteRenderer sr;
 	void Start () {
-		print (Physics.queriesHitTriggers);
+		//print (Physics.queriesHitTriggers);
 	}
 	
 	// Update is called once per frame
@@ -14,7 +14,12 @@ public class PieceDrag : MonoBehaviour {
 		Vector3 v3 = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		v3.z = 0;
 		transform.position = v3;
-		}
+		//print (GetRelativeLayer());
+	}
+
+	int GetRelativeLayer(){
+		return (int)(transform.position.y / -1.69);
+	}
 
 
 
