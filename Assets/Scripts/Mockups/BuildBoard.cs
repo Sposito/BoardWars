@@ -9,6 +9,7 @@ public class BuildBoard : MonoBehaviour {
 
 	public Color white = Color.white;
 	public Color black = Color.black;
+	public Color selectedColor = Color.blue;
 
 	Vector3 tileRight;
 	Vector3 tileDown;
@@ -23,7 +24,7 @@ public class BuildBoard : MonoBehaviour {
 	}
 		
 	private void Build(){
-
+		
 		int rowCount = 0;
 		int layerOrder = 0;
 		int orderDirection = 1;
@@ -35,6 +36,7 @@ public class BuildBoard : MonoBehaviour {
 		int nextColumn = 0;
 
 		GameObject currentGO;
+		SquareBehaviour[] sqBehaviour = new SquareBehaviour[64];
 
 		for (int i = 0; i < 64; i++){
 			currentGO = (GameObject)Instantiate (tile, currentTile, Quaternion.identity);
@@ -42,6 +44,8 @@ public class BuildBoard : MonoBehaviour {
 			currentGO.GetComponent<SpriteRenderer> ().color = (i % 2 == 0)? white:black;
 			currentGO.name = (columns [nextColumn] + "" + rows [nextRow]) ;
 			currentGO.transform.SetParent (transform);
+			sqBehaviour[nextRow + nextColumn * 8] = currentGO.GetComponent<SquareBehaviour> ();
+			currentGO.GetComponent<SquareBehaviour> ().position = new Position (nextColumn, nextRow);
 			if (rowCount < 7) {
 				//Defines where the next tile will be placed
 				currentTile += tileRight;
@@ -64,6 +68,8 @@ public class BuildBoard : MonoBehaviour {
 					// -> its making use of the orderDirection reversal executed in the aboves step
 			}
 		}
+
+		GetComponent<BoardController> ().SetSquareBehaviours (sqBehaviour);
 	}
 
 

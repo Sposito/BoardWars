@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 
 public class BoardMap {
 
@@ -66,31 +68,22 @@ public class BoardMap {
 		}
 	}
 
+	#region MovementPAtterns
 	public static BoardMap Cross(int x, int y){
 		BoardMap cross = new BoardMap (false);
 
 		for (int i = 0; i < 8; i++) {
-			cross.SetTile (y, i, true);
+			if(y != i)
+				cross.SetTile (x, i, true);
 		}
 		for (int i = 0; i < 8; i++){
-			cross.SetTile (i, x, true);
+			if(x != i) 
+				cross.SetTile (i, y, true);
 		}
 
 		return cross;
 		
 	}
-
-	public override string ToString(){
-		string result = "";
-		for (int j = 0; j < 8; j++) 
-			for (int i = 0; i < 8; i++) {
-				result += GetTile(i,j)?"X ":"  ";
-				if (i == 7)
-					result += "\n";
-			}
-		return result;
-	}
-
 	public static BoardMap DiagonalCross(int x, int y){ //TODO: check the weird (5,4) behaviour
 		BoardMap dCross = new BoardMap (false);
 		Position head = new Position (x, y);
@@ -107,7 +100,7 @@ public class BoardMap {
 		}
 		head.Set (x, y);
 
-		while (head.GetX () >0 && head.GetY () < 7) {
+		while (head.GetX () > 0 && head.GetY () < 7) {
 			head.Move (Directions.SW);
 			dCross.SetTile (head, true);
 		}
@@ -119,7 +112,114 @@ public class BoardMap {
 		}
 
 		return dCross;
-
 	}
+	public static BoardMap ShortL(int x, int y){
+		BoardMap boardmap = new BoardMap (false);
+
+		Position head = new Position (x + 1, y + 2);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x + 2, y + 1);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x + 2, y -1);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x +1, y -2);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x -1, y -2);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x -2, y -1);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x-1, y +2);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		 head = new Position (x-2, y + 1);
+		if (head.isValid)
+			boardmap.SetTile (head, true);
+		
+		return boardmap;
+	
+	}
+	public static BoardMap ComposedCross(int x, int y){
+		BoardMap map = Cross (x, y);
+		map.Add (DiagonalCross (x, y));
+		return map;
+	}
+	public static BoardMap ShortSquare(int x, int y){
+		BoardMap map = new BoardMap (false);
+		var directions = Enum.GetValues (typeof(Directions));
+		foreach (Directions d in directions) {
+			Position pos = new Position (x, y);
+			pos.Move (d);
+			if (pos.isValid)
+				map.SetTile(pos, true);
+		}
+		return map;
+	}
+	public static BoardMap Ahead(int x, int y, Directions direction){
+
+		BoardMap map = new BoardMap (false);
+		Position pos = new Position (x, y);
+		if (direction.ToString ().Length == 1) {
+			pos.Move (direction);
+			if (pos.isValid)
+				map.SetTile (pos, true);
+		} 
+		else 
+			Debug.LogError ("A straight direction is required (N, S, E , W");
+	
+		return map;
+	}
+	public static BoardMap DiagonalAhead(int x, int y, Directions direction){
+		BoardMap map = new BoardMap (false);
+		Position pos1 = new Position (x, y);
+		Position pos2 = new Position (x, y);
+		switch (direction) {
+		case Directions.N:
+			pos1.Move (Directions.NE);
+			pos2.Move (Directions.NW);
+			break;
+		case Directions.S:
+			pos1.Move (Directions.SE);
+			pos2.Move (Directions.SW);
+			break;;
+		case Directions.E:
+			pos1.Move (Directions.NE);
+			pos2.Move (Directions.SE);
+			break;
+		case Directions.W:
+			pos1.Move (Directions.NW);
+			pos2.Move (Directions.SW);
+			break;
+		default:
+			Debug.LogError ("A straight direction is required (N, S, E , W");
+			break;
+		}
+		if (pos1.isValid)
+			map.SetTile (pos1, true);
+		if (pos2.isValid)
+			map.SetTile (pos2, true);
+
+		return map;
+	}
+	#endregion
+
+	public override string ToString(){
+		string result = "";
+		for (int j = 0; j < 8; j++) 
+			for (int i = 0; i < 8; i++) {
+				result += GetTile(i,j)?"X ":"  ";
+				if (i == 7)
+					result += "\n";
+			}
+		return result;
+	}
+
+
+
 
 }

@@ -22,6 +22,15 @@ public class Position  {
 		return y;
 	}
 
+	public bool isValid{get{
+			if (x < 8 && x >= 0 && y < 8 && y >= 0)
+				return true;
+			else
+				return false;
+		}
+		set{ }
+	}
+
 	public void Move(Directions dir){
 		switch (dir) {
 		case Directions.N:
