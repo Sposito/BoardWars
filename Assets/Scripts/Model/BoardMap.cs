@@ -2,11 +2,8 @@
 using System.Collections;
 using System;
 
-
 public class BoardMap {
-
 	private bool[,] boardMap = new bool[8, 8];
-
 
 	public BoardMap(bool fill){
 		for (int i = 0; i < boardMap.GetLength (0); i++) {
@@ -32,6 +29,7 @@ public class BoardMap {
 	void SetTile(Position pos, bool value){
 		SetTile (pos.GetX (), pos.GetY (), value);
 	}
+
 	/// <summary> Add the given BoardMap</summary>
 	public void Add(BoardMap map){
 		for (int i = 0; i < boardMap.GetLength (0); i++) {
@@ -89,25 +87,25 @@ public class BoardMap {
 		Position head = new Position (x, y);
 
 		while (head.GetX () > 0 && head.GetY () > 0) {
-			head.Move (Directions.NW);
-			dCross.SetTile (head, true);
-		}
-		head.Set (x, y);
-
-		while (head.GetX () < 7 && head.GetY () > 0) {
-			head.Move (Directions.NE);
-			dCross.SetTile (head, true);
-		}
-		head.Set (x, y);
-
-		while (head.GetX () > 0 && head.GetY () < 7) {
 			head.Move (Directions.SW);
 			dCross.SetTile (head, true);
 		}
 		head.Set (x, y);
 
-		while (head.GetX () < 7 && head.GetY () < 7) {
+		while (head.GetX () < 7 && head.GetY () > 0) {
 			head.Move (Directions.SE);
+			dCross.SetTile (head, true);
+		}
+		head.Set (x, y);
+
+		while (head.GetX () > 0 && head.GetY () < 7) {
+			head.Move (Directions.NW);
+			dCross.SetTile (head, true);
+		}
+		head.Set (x, y);
+
+		while (head.GetX () < 7 && head.GetY () < 7) {
+			head.Move (Directions.NE);
 			dCross.SetTile (head, true);
 		}
 
@@ -208,6 +206,27 @@ public class BoardMap {
 	}
 	#endregion
 
+	/// <summary> Returns a BoardMap with all occuppied places by a given Piece vector.</summary>
+	public static BoardMap OcuppiedPlaces(Piece[] pieces){
+		BoardMap map = new BoardMap (false);
+		for (int i = 0; i < pieces.Length; i++) {
+			Position pos = pieces[i].GetPosition ();
+			if (pos.isValid)
+				map.SetTile (pos, true);
+		}
+		return map;
+	}
+	/// <summary> Returns a BoardMap with all specific player's occuppied places by a given Piece vector.</summary>
+	public static BoardMap OcuppiedPlaces(Piece[] pieces, Player player){
+		BoardMap map = new BoardMap (false);
+		for (int i = 0; i < pieces.Length; i++) {
+			Position pos = pieces[i].GetPosition ();
+			if (pos.isValid && pieces[i].GetPlayer() == player)
+				map.SetTile (pos, true);
+		}
+		return map;
+	}
+	/// <summary> Visual string representation of a boardmap </summary>
 	public override string ToString(){
 		string result = "";
 		for (int j = 0; j < 8; j++) 
@@ -218,8 +237,5 @@ public class BoardMap {
 			}
 		return result;
 	}
-
-
-
-
+		
 }

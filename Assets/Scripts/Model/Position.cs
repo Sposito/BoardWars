@@ -34,28 +34,28 @@ public class Position  {
 	public void Move(Directions dir){
 		switch (dir) {
 		case Directions.N:
-			Set (x, y - 1);
+			Set (x, y + 1);
 			return;
 		case Directions.NE:
-			Set (x + 1, y - 1);
+			Set (x + 1, y + 1);
 			return;
 		case Directions.E:
 			Set (x + 1, y);
 			return;
 		case Directions.SE:
-			Set (x + 1, y + 1);
+			Set (x + 1, y - 1);
 			return;
 		case Directions.S:
-			Set (x, y + 1);
+			Set (x, y - 1);
 			return;
 		case Directions.SW:
-			Set (x - 1, y + 1);
+			Set (x - 1, y - 1);
 			return;
 		case Directions.W:
 			Set (x - 1, y);
 			return;
 		case Directions.NW:
-			Set (x - 1, y - 1);
+			Set (x - 1, y + 1);
 			return;
 		}
 	}

@@ -19,7 +19,7 @@ public class BoardController : MonoBehaviour {
 	}
 
 	public static void SetMap(int x, int y){
-		map = BoardMap.DiagonalAhead(x,y, Directions.S);
+		map = BoardMap.DiagonalCross(x,y);
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if (map.GetTile(i,j))
