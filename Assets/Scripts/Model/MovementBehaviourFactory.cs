@@ -4,9 +4,9 @@ using System.Collections;
 public class MovementBehaviourFactory
 {
 
-	public static MovementBehaviour Generate (){
-		return new MovementBehaviour ();
-	}
+//	public static MovementBehaviour Generate (){
+////		return new MovementBehaviour ();
+//	}
 }
 
 

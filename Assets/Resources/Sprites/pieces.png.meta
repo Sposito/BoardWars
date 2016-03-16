@@ -1,21 +1,21 @@
 fileFormatVersion: 2
 guid: c5cc829865c6b42e582e165f9c124ae2
-timeCreated: 1455669127
+timeCreated: 1457899665
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: King_Base
-    21300002: King_Detail
-    21300004: Knight_Base
-    21300006: Queen_Detail
-    21300008: Knight_Detail
-    21300010: Mage_Base
-    21300012: Mage_Detail
-    21300014: Rook_Base
-    21300016: Pawn_Base
-    21300018: Pawn_Detail
-    21300020: Queen_Base
-    21300022: Rook_Detail
+    21300000: KING_Base
+    21300002: KING_Detail
+    21300004: KNIGHT_Base
+    21300006: QUEEN_Detail
+    21300008: KNIGHT_Detail
+    21300010: MAGE_Base
+    21300012: MAGE_Detail
+    21300014: ROOK_Base
+    21300016: PAWN_Base
+    21300018: PAWN_Detail
+    21300020: QUEEN_Base
+    21300022: ROOK_Detail
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -62,7 +62,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: King_Base
+    - name: KING_Base
       rect:
         serializedVersion: 2
         x: 0
@@ -103,7 +103,7 @@ TextureImporter:
         - {x: 38, y: 186}
         - {x: 38, y: 204}
         - {x: 36, y: 210}
-    - name: King_Detail
+    - name: KING_Detail
       rect:
         serializedVersion: 2
         x: 512
@@ -131,7 +131,7 @@ TextureImporter:
         - {x: 56, y: 186}
         - {x: 56, y: 206}
         - {x: 24, y: 249}
-    - name: Knight_Base
+    - name: KNIGHT_Base
       rect:
         serializedVersion: 2
         x: 1024
@@ -160,7 +160,7 @@ TextureImporter:
         - {x: 109, y: -38}
         - {x: 115, y: -12}
         - {x: 133, y: 43}
-    - name: Queen_Detail
+    - name: QUEEN_Detail
       rect:
         serializedVersion: 2
         x: 1536
@@ -189,7 +189,7 @@ TextureImporter:
         - {x: 84, y: 175}
         - {x: 84, y: 183}
         - {x: 49, y: 211}
-    - name: Knight_Detail
+    - name: KNIGHT_Detail
       rect:
         serializedVersion: 2
         x: 0
@@ -209,7 +209,7 @@ TextureImporter:
         - {x: 31, y: -19}
         - {x: 31, y: -9}
         - {x: -76, y: 71}
-    - name: Mage_Base
+    - name: MAGE_Base
       rect:
         serializedVersion: 2
         x: 512
@@ -244,7 +244,7 @@ TextureImporter:
         - {x: 91, y: 69}
         - {x: 99, y: 142}
         - {x: 99, y: 182}
-    - name: Mage_Detail
+    - name: MAGE_Detail
       rect:
         serializedVersion: 2
         x: 1024
@@ -268,7 +268,7 @@ TextureImporter:
         - {x: 105, y: 52}
         - {x: 105, y: 71}
         - {x: 97, y: 84}
-    - name: Rook_Base
+    - name: ROOK_Base
       rect:
         serializedVersion: 2
         x: 1536
@@ -302,7 +302,7 @@ TextureImporter:
         - {x: 12, y: -2}
         - {x: 106, y: 65}
         - {x: 106, y: 155}
-    - name: Pawn_Base
+    - name: PAWN_Base
       rect:
         serializedVersion: 2
         x: 0
@@ -330,7 +330,7 @@ TextureImporter:
         - {x: 92, y: 10}
         - {x: 103, y: 44}
         - {x: 103, y: 53}
-    - name: Pawn_Detail
+    - name: PAWN_Detail
       rect:
         serializedVersion: 2
         x: 512
@@ -348,7 +348,7 @@ TextureImporter:
         - {x: 56, y: -61}
         - {x: 105, y: -15}
         - {x: 105, y: 24}
-    - name: Queen_Base
+    - name: QUEEN_Base
       rect:
         serializedVersion: 2
         x: 1022
@@ -386,7 +386,7 @@ TextureImporter:
         - {x: 6, y: 125}
         - {x: 55, y: 165}
         - {x: 63, y: 173}
-    - name: Rook_Detail
+    - name: ROOK_Detail
       rect:
         serializedVersion: 2
         x: 1536

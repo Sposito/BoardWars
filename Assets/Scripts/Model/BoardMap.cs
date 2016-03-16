@@ -12,22 +12,25 @@ public class BoardMap {
 			}
 		}
 	}
+
+	public static BoardMap Empty{ get{return new BoardMap (false);}}
+
 	/// <summary> Get the the tile value in the x, y positions </summary>
 	public bool GetTile(int x, int y){
 		return boardMap [x, y];
 	}
 	/// <summary> Get the the tile value in the given Position </summary>
 	protected bool GetTile(Position pos){
-		return GetTile (pos.GetX (), pos.GetY ());
+		return GetTile (pos.X, pos.Y );
 	}
 
 	/// <summary> Set the the tile value in the x, y positions </summary>
-	void SetTile(int x, int y, bool value){
+	public void SetTile(int x, int y, bool value){
 		boardMap [x, y] = value;
 	}
 	/// <summary> Set the the tile value in given Positions </summary>
-	void SetTile(Position pos, bool value){
-		SetTile (pos.GetX (), pos.GetY (), value);
+	public void SetTile(Position pos, bool value){
+		SetTile (pos.X , pos.Y, value);
 	}
 
 	/// <summary> Add the given BoardMap</summary>
@@ -86,25 +89,25 @@ public class BoardMap {
 		BoardMap dCross = new BoardMap (false);
 		Position head = new Position (x, y);
 
-		while (head.GetX () > 0 && head.GetY () > 0) {
+		while (head.X > 0 && head.Y > 0) {
 			head.Move (Directions.SW);
 			dCross.SetTile (head, true);
 		}
 		head.Set (x, y);
 
-		while (head.GetX () < 7 && head.GetY () > 0) {
+		while (head.X < 7 && head.Y > 0) {
 			head.Move (Directions.SE);
 			dCross.SetTile (head, true);
 		}
 		head.Set (x, y);
 
-		while (head.GetX () > 0 && head.GetY () < 7) {
+		while (head.X > 0 && head.Y < 7) {
 			head.Move (Directions.NW);
 			dCross.SetTile (head, true);
 		}
 		head.Set (x, y);
 
-		while (head.GetX () < 7 && head.GetY () < 7) {
+		while (head.X < 7 && head.Y < 7) {
 			head.Move (Directions.NE);
 			dCross.SetTile (head, true);
 		}
@@ -142,11 +145,25 @@ public class BoardMap {
 		return boardmap;
 	
 	}
+	public static BoardMap ShortL(Position position){
+		return ShortL (position.X, position.Y);
+	}
+
 	public static BoardMap ComposedCross(int x, int y){
 		BoardMap map = Cross (x, y);
 		map.Add (DiagonalCross (x, y));
 		return map;
 	}
+
+	public static BoardMap SinglePosition(int x, int y){
+		BoardMap map = BoardMap.Empty;
+		map.SetTile (x, y, true);
+		return map;
+	}
+	public static BoardMap SinglePosition(Position pos){
+		return SinglePosition (pos.X, pos.Y);
+	}
+
 	public static BoardMap ShortSquare(int x, int y){
 		BoardMap map = new BoardMap (false);
 		var directions = Enum.GetValues (typeof(Directions));
@@ -158,6 +175,10 @@ public class BoardMap {
 		}
 		return map;
 	}
+	public static BoardMap ShortSquare(Position position){
+		return ShortSquare (position.X, position.Y);
+	}
+
 	public static BoardMap Ahead(int x, int y, Directions direction){
 
 		BoardMap map = new BoardMap (false);
@@ -172,6 +193,30 @@ public class BoardMap {
 	
 		return map;
 	}
+
+	public static BoardMap Ahead(Position position, Player player){
+		Directions direction = Directions.N;
+
+		switch (player) {
+		case Player.PLAYER1:
+			direction = Directions.E;
+			break;
+		case Player.PLAYER2:
+			direction = Directions.S;
+			break;
+		case Player.PLAYER3:
+			direction = Directions.W;
+			break;
+		case Player.PLAYER4:
+			direction = Directions.N;
+			break;
+		default:
+			break;
+		}
+
+		return  Ahead (position.X, position.Y, direction);
+	}
+
 	public static BoardMap DiagonalAhead(int x, int y, Directions direction){
 		BoardMap map = new BoardMap (false);
 		Position pos1 = new Position (x, y);
@@ -204,6 +249,55 @@ public class BoardMap {
 
 		return map;
 	}
+	public static BoardMap DiagonalAhead(Position position, Player player){
+		Directions direction = Directions.N;
+		switch (player) {
+		case Player.PLAYER1:
+			direction = Directions.E;
+			break;
+		case Player.PLAYER2:
+			direction = Directions.S;
+			break;
+		case Player.PLAYER3:
+			direction = Directions.W;
+			break;
+		case Player.PLAYER4:
+			direction = Directions.N;
+			break;
+		default:
+			break;
+		}
+
+		return DiagonalAhead (position.X, position.Y, direction);
+	}
+		
+	public static BoardMap BlockedLineMovement(int x, int y, BoardMap blockedMap, bool diagonal){
+		
+		BoardMap map = BoardMap.Empty;
+		Directions[]  cross = { Directions.N, Directions.E, Directions.S, Directions.W };
+		Directions[] xCross = { Directions.NE, Directions.NW, Directions.SE, Directions.SW };
+		Directions[] directions = diagonal ? xCross : cross;
+		foreach (Directions d in directions) {
+			Position head = new Position(x,y);
+			head.Move (d);
+			while (head.isValid) {
+				
+				if (!blockedMap.GetTile (head)) {
+					map.SetTile (head, true);
+					head.Move (d);
+				} 
+				else {
+					map.SetTile (head, true);
+					break;
+				}
+			}
+		}
+		return map;
+	}
+	public static BoardMap BlockedLineMovement(Position position, BoardMap blockedMap,bool diagonal){
+		return BlockedLineMovement (position.X, position.Y, blockedMap, diagonal);
+	}
+
 	#endregion
 
 	/// <summary> Returns a BoardMap with all occuppied places by a given Piece vector.</summary>
@@ -226,12 +320,26 @@ public class BoardMap {
 		}
 		return map;
 	}
+
+	public static BoardMap OcuppiedEnemyPlaces(Piece[] pieces, Player player){
+		BoardMap map = new BoardMap (false);
+		for (int i = 0; i < pieces.Length; i++) {
+			Position pos = pieces[i].GetPosition ();
+			if (pos.isValid && pieces[i].GetPlayer() != player)
+				map.SetTile (pos, true);
+		}
+		return map;
+	}
+
+	//public static BoardMap RookMovement(Position position, BoardMap pieceMap){
+	
+	//}
 	/// <summary> Visual string representation of a boardmap </summary>
 	public override string ToString(){
 		string result = "";
 		for (int j = 0; j < 8; j++) 
 			for (int i = 0; i < 8; i++) {
-				result += GetTile(i,j)?"X ":"  ";
+				result += GetTile(i,7 - j)?"X ":"  ";
 				if (i == 7)
 					result += "\n";
 			}

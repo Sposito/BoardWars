@@ -29,26 +29,26 @@ public class SquareBehaviour : MonoBehaviour {
 	}
 
 	public void UnSelect(){
-		//StopCoroutine ("BrightOff");
-	//	StartCoroutine("BrightOn");
+//		StopCoroutine ("BrightOff");
+//		StartCoroutine("BrightOn");
 
 		//spriteRenderer.color = Color.white;
-		spriteRenderer.color = baseColor;
+	spriteRenderer.color = baseColor;
 
 
 	}
 
 	public void Select(){
 		//spriteRenderer.color = baseColor;
-	//	StopCoroutine ("BrightOn");
-		//StartCoroutine("BrightOff");
-		spriteRenderer.color = Color.magenta;
+//		StopCoroutine ("BrightOn");
+//		StartCoroutine("BrightOff");
+		spriteRenderer.color = GeneralTools.Hex.ToColor("F7FE82");
 
 	}
 
 	void OnMouseEnter(){
-		print (gameObject.name);
-		BoardController.SetMap (position.GetX (), position.GetY ());
+		//print (gameObject.name);
+		BoardController.SetActiveSquare (position);
 	}
 
 	IEnumerator BrightOn(){

@@ -4,12 +4,12 @@ using System.Collections;
 public class BuildBoard : MonoBehaviour {
 
 	public GameObject tile;
-	public float xSpacing = 2.07f;
-	public float ySpacing = 1.69f;
+	public float xSpacing = BoardController.xSpacing;
+	public float ySpacing = BoardController.ySpacing;
 
-	public Color white = Color.white;
-	public Color black = Color.black;
-	public Color selectedColor = Color.blue;
+	public Color white = GeneralTools.Hex.ToColor("A2AD5DC0");
+	public Color black = GeneralTools.Hex.ToColor("C6CB68B6");
+	public Color selectedColor = GeneralTools.Hex.ToColor ("EAD562FF");
 
 	Vector3 tileRight;
 	Vector3 tileDown;
@@ -19,8 +19,10 @@ public class BuildBoard : MonoBehaviour {
 		tileRight = new Vector3 (xSpacing, -ySpacing);
 		tileDown = new Vector3 (-xSpacing, -ySpacing);
 		currentTile = Vector3.zero;
+		tile =(GameObject) Resources.Load ("Prefabs/square");
 
 		Build ();
+		AddPieces ();
 	}
 		
 	private void Build(){
@@ -29,7 +31,7 @@ public class BuildBoard : MonoBehaviour {
 		int layerOrder = 0;
 		int orderDirection = 1;
 
-		string columns = "abcdefgh";
+		string columns = "ABCDEFGH";
 		string rows = "12345678";
 
 		int nextRow = 7;
@@ -72,7 +74,22 @@ public class BuildBoard : MonoBehaviour {
 		GetComponent<BoardController> ().SetSquareBehaviours (sqBehaviour);
 	}
 
+	private void AddPieces(){
+		GameState gameState = BoardController.GetCurrentState ();
+		GameObject pieceGO = (GameObject)Resources.Load ("Prefabs/piece");
+		foreach (Piece p in gameState) {
+			string name = p.GetPosition ().ToString ();
+			GameObject currentPiece = (GameObject)Instantiate (pieceGO, transform.Find (name).position, Quaternion.identity);
+			currentPiece.transform.SetParent (transform.Find (name));
 
+			PieceBehaviour pieceBehaviour =	currentPiece.GetComponent<PieceBehaviour> ();
+			pieceBehaviour.SetPieceKind (p.GetKind ());
+			pieceBehaviour.SetPlayer (p.GetPlayer ());
+			pieceBehaviour.BuildPiece ();
+
+		}
+
+	}
 
 	private Vector3 GetScenePosition(int x, int y){
 		return tileRight * x + tileDown * y;

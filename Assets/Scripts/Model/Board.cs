@@ -6,7 +6,17 @@ public class Board  {
 
 	public Board (Piece[] pieces){
 		for (int i = 0; i < pieces.Length; i++) {
-			pieces [i].GetPosition ();
+			Position pos = pieces [i].GetPosition ();
+			this.pieces [pos.X, pos.Y] = pieces [i];
+
 		}
+	}
+
+	public Piece GetPiece(Position pos){
+		if (pieces[pos.X, pos.Y] != null)
+			return pieces[pos.X, pos.Y];
+		else
+			return null;
+
 	}
 }
