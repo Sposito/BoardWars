@@ -64,4 +64,30 @@ public class GameState : IEnumerable<Piece> {
 	public Piece GetPiecebyPosition(Position pos){
 		return board.GetPiece (pos);
 	}
+
+	public void NextPlayer(){
+		if ((int)currentPlayer < 3)
+			currentPlayer++;
+		else
+			currentPlayer = Player.PLAYER1;
+	}
+
+	public void MovePiece(Position oldPosition, Position newPosition){
+		Piece piece = board.GetPiece (oldPosition);
+		piece.SetPosition (newPosition);
+		board.SetPiece (newPosition, piece);
+		board.RemovePiece (oldPosition);
+
+		pieces = board.GetPieces ();
+
+
+
+	}
+	public override string ToString(){
+		string result = "";
+		foreach (Piece p in pieces) {
+			result += p.GetPlayer().ToString() + " " + p.GetName() + " : " + p.GetPosition().ToString() + "\n";
+		}
+		return result;
+	}
 }

@@ -5,7 +5,7 @@ public class GameController  {
 	public readonly static float xSpacing = 2.07f;
 	public readonly static float ySpacing = 1.69f;
 
-	private GameState[] gameStates;
+	private  GameState[] gameStates;
 
 
 	public GameController(){
@@ -16,7 +16,7 @@ public class GameController  {
 //		// check if movement is valid
 //	}
 
-	private void AddGameState(GameState gameState){
+	public void AddGameState(GameState gameState){
 		int lenght = (gameStates == null) ? 0 : gameStates.Length;
 		GameState[] temporaryGameStates = new GameState[lenght + 1];
 		for (int i = 0; i < lenght; i++) {
@@ -35,5 +35,13 @@ public class GameController  {
 
 	public Piece GetPiecebyPos(Position position){
 		return GetCurrentState ().GetPiecebyPosition (position);
+	}
+
+	public string GetStringStates(){
+		string result = "";
+		foreach (GameState gS in gameStates) {
+			result += gS.ToString() + "\n\n";
+		}
+		return result;
 	}
 }

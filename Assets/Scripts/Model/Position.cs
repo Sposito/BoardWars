@@ -48,7 +48,7 @@ public class Position  {
 		Vector3 right = new Vector3 (BoardController.xSpacing, -BoardController.ySpacing);
 		Vector3 down = new Vector3 (-BoardController.xSpacing, -BoardController.ySpacing);
 
-		return right * x + down * y;
+		return right * x + down * (7 -y); //TODO investigate whats is going on heare with wrong sys cordinates
 	}
 
 	public void Move(Directions dir){

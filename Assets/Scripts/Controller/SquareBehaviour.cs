@@ -48,7 +48,12 @@ public class SquareBehaviour : MonoBehaviour {
 
 	void OnMouseEnter(){
 		//print (gameObject.name);
-		BoardController.SetActiveSquare (position);
+		BoardController.SetHighlightSquare (position);
+	}
+
+	void OnMouseDown(){
+		//print (gameObject.name);
+		BoardController.Click (position);
 	}
 
 	IEnumerator BrightOn(){

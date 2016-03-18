@@ -15,6 +15,17 @@ public class BoardMap {
 
 	public static BoardMap Empty{ get{return new BoardMap (false);}}
 
+	public bool IsEmpty{
+		get{
+			foreach (bool b in boardMap) {
+				if (b)
+					return false;
+			}
+				
+			return true;
+		}
+	}
+
 	/// <summary> Get the the tile value in the x, y positions </summary>
 	public bool GetTile(int x, int y){
 		return boardMap [x, y];
