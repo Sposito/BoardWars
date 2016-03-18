@@ -103,9 +103,13 @@ public class BoardController : MonoBehaviour {
 					newGameState.MovePiece (firstClickPos, position);
 					newGameState.NextPlayer ();
 					gameController.AddGameState (newGameState);
+					GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+					pieceGameObject.transform.position = position.ToScenePosition ();
+					pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
+
 
 					//GameObject.Find(firstClickPos.ToString()).transform.position = position.ToScenePosition ();
-					GameObject.Find(firstClickPos.ToString()).transform.position = position.ToScenePosition ();
+					//GameObject.Find("Board").GetComponent<BuildBoard>().AddPieces(false);
 
 				}
 			}

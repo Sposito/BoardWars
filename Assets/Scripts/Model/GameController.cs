@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 public class GameController  {
 	public readonly static float xSpacing = 2.07f;
 	public readonly static float ySpacing = 1.69f;
 
-	private  GameState[] gameStates;
+	private  readonly List<GameState> gameStates;
 
 
 	public GameController(){
+		gameStates = new List<GameState> ();
 		AddGameState(InitialStateBuilder.CreateInitialGameState () );
 	}
 
@@ -17,20 +19,21 @@ public class GameController  {
 //	}
 
 	public void AddGameState(GameState gameState){
-		int lenght = (gameStates == null) ? 0 : gameStates.Length;
-		GameState[] temporaryGameStates = new GameState[lenght + 1];
-		for (int i = 0; i < lenght; i++) {
-			temporaryGameStates [i] = gameStates [i];
-		}
-		temporaryGameStates [temporaryGameStates.Length - 1] = gameState;
-
-
-		gameStates = temporaryGameStates;
-
+//		int lenght = (gameStates == null) ? 0 : gameStates.Length;
+//		GameState[] temporaryGameStates = new GameState[lenght + 1];
+//		for (int i = 0; i < lenght; i++) {
+//			temporaryGameStates [i] = gameStates [i];
+//		}
+//		temporaryGameStates [temporaryGameStates.Length - 1] = gameState;
+//
+//
+//		gameStates = temporaryGameStates;
+		gameStates.Add(gameState);
 	}
 
 	public GameState GetCurrentState(){
-		return gameStates [gameStates.Length - 1];
+	//	return gameStates [gameStates.Length - 1];
+		return gameStates[gameStates.Count -1];
 	}
 
 	public Piece GetPiecebyPos(Position position){
