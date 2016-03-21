@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class BoardController : MonoBehaviour {
 	static SquareBehaviour[] squares;
 	static BoardMap map;
@@ -100,17 +100,45 @@ public class BoardController : MonoBehaviour {
 			if (highlight.GetTile (position.X, position.Y)) {
 				if (piece == null) {
 					GameState newGameState = gameController.GetCurrentState ();
-					newGameState.MovePiece (firstClickPos, position);
+					newGameState.MovePiece (firstClickPos, position, false);
 					newGameState.NextPlayer ();
 					gameController.AddGameState (newGameState);
+
 					GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
 					pieceGameObject.transform.position = position.ToScenePosition ();
 					pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
-
-
 					//GameObject.Find(firstClickPos.ToString()).transform.position = position.ToScenePosition ();
 					//GameObject.Find("Board").GetComponent<BuildBoard>().AddPieces(false);
+				}
 
+				else {
+					if (piece.ReceiveHit (gameController.GetPiecebyPos (firstClickPos))) { // here we make the test and update the hp
+						GameState newGameState = gameController.GetCurrentState ();
+						newGameState.MovePiece (firstClickPos, position, true);
+						newGameState.NextPlayer ();
+						gameController.AddGameState (newGameState);
+
+						Destroy (GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject);
+						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+						pieceGameObject.transform.position = position.ToScenePosition ();
+						pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
+
+						print ("destroyed");
+
+						if (piece.GetKind () == ItemKind.KING) {
+							Piece[] piecesTobeRemoved = gameController.GetCurrentState ().GetPieces (piece.GetPlayer ());
+							List<Position> piecePositions = new List<Position> ();
+							foreach (Piece p in piecesTobeRemoved) {
+								Destroy (GameObject.Find (p.GetPosition().ToString ()).transform.GetChild (0).gameObject);
+							}
+						}
+					} else {
+						GameState newGameState = gameController.GetCurrentState ();
+						newGameState.NextPlayer ();
+						gameController.AddGameState (newGameState);
+					}
+						
+				
 				}
 			}
 			hasPieceSelected = false;

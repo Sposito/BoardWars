@@ -13,6 +13,8 @@ public class GameState : IEnumerable<Piece> {
 
 	private Position actorPosition;
 	private Position targetPosition; 
+
+	private bool[] activePlayers = { true, false, true, false };
 	public GameState(){ // provisory contructor
 	
 	}
@@ -65,14 +67,18 @@ public class GameState : IEnumerable<Piece> {
 		return board.GetPiece (pos);
 	}
 
-	public void NextPlayer(){
+	public void NextPlayer(){ //TODO: WARNING!!! IF FOR SOME REASON ALL THE KINGS DIE AT ONCE IT WILL CRASH in an infinite loop!!!
 		if ((int)currentPlayer < 3)
 			currentPlayer++;
 		else
 			currentPlayer = Player.PLAYER1;
+
+		if (!activePlayers [(int)currentPlayer]) {
+			NextPlayer ();
+		}
 	}
 
-	public void MovePiece(Position oldPosition, Position newPosition){
+	public void MovePiece(Position oldPosition, Position newPosition, bool destroy){
 		Piece piece = board.GetPiece (oldPosition);
 		piece.SetPosition (newPosition);
 		board.SetPiece (newPosition, piece);
@@ -80,9 +86,39 @@ public class GameState : IEnumerable<Piece> {
 
 		pieces = board.GetPieces ();
 
+		if (destroy) {
+			Piece targetPiece = board.GetPiece (newPosition);
+			if (targetPiece.GetKind () == ItemKind.KING)
+				RemovePlayer (targetPiece.GetPlayer() );
+		
+		}
+	}
+	private void RemovePiece(Position position){
+		Piece piece = board.GetPiece (position);
+
+
+		board.RemovePiece (position);
+		pieces = board.GetPieces ();
+
+		if (piece.GetKind () == ItemKind.KING)
+			RemovePlayer (piece.GetPlayer() );
+	}
+
+	private void RemovePlayer(Player player){
+		List<Piece> tempPieces = new List<Piece> ();
+		foreach (Piece p in pieces) {
+			if (p.GetPlayer () != player)
+				tempPieces.Add (p);
+		}
+
+		activePlayers [(int)player] = false;
+		pieces = tempPieces.ToArray ();
+		board = new Board (pieces);
 
 
 	}
+		
+
 	public override string ToString(){
 		string result = "";
 		foreach (Piece p in pieces) {

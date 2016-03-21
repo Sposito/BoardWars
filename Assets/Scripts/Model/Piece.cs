@@ -24,6 +24,10 @@ public class Piece: Item  {
 	public string GetName(){
 		return name;
 	}
+
+	public int GetAttack(){
+		return attack;
+	}
 	public ItemKind GetKind(){
 		return kind;
 	}
@@ -50,7 +54,16 @@ public class Piece: Item  {
 		this.position = position;
 	}
 	#endregion
+	public bool ReceiveHit(Piece piece){
+		int totalDamage = piece.GetAttack ();
 
+		if (totalDamage >= hp)
+			return true;
+		else {
+			hp -= totalDamage;
+			return false;
+		}
+	}
 	public Piece(string name, ItemKind kind, Player player, int hp, int attack, Item core, Item shell, Enchantment enchantment){
 		this.name = name;
 		this.kind = kind;

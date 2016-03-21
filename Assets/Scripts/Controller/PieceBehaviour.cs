@@ -51,6 +51,11 @@ public class PieceBehaviour : MonoBehaviour {
 	public void SetPlayer (Player player){
 		this.player = player;
 	}
+
+	public void Move(Position position){
+		transform.position = position.ToScenePosition ();
+		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+	}
 	public void BuildPiece(){
 		string baseName = pieceKind.ToString() + "_Base";
 		string detailName = pieceKind.ToString() + "_Detail";
