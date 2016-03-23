@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\PieceSpawner.cs" />
+     <Compile Include="Assets\Scripts\CloudsController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardMapPrevew.cs" />
      <Compile Include="Assets\Scripts\Controller\BuildBoard.cs" />
