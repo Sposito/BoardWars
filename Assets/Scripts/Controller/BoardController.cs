@@ -113,8 +113,12 @@ public class BoardController : MonoBehaviour {
 
 				else {
 					if (piece.ReceiveHit (gameController.GetPiecebyPos (firstClickPos))) { // here we make the test and update the hp
+						//Remove all gameobjects if a king is captured
+						RemovePiecesIfKing(piece);
+
 						GameState newGameState = gameController.GetCurrentState ();
 						newGameState.MovePiece (firstClickPos, position, true);
+						//newGameState.MovePiece (position, firstClickPos);
 						newGameState.NextPlayer ();
 						gameController.AddGameState (newGameState);
 
@@ -125,13 +129,8 @@ public class BoardController : MonoBehaviour {
 
 						print ("destroyed");
 
-						if (piece.GetKind () == ItemKind.KING) {
-							Piece[] piecesTobeRemoved = gameController.GetCurrentState ().GetPieces (piece.GetPlayer ());
-							List<Position> piecePositions = new List<Position> ();
-							foreach (Piece p in piecesTobeRemoved) {
-								Destroy (GameObject.Find (p.GetPosition().ToString ()).transform.GetChild (0).gameObject);
-							}
-						}
+
+
 					} else {
 						GameState newGameState = gameController.GetCurrentState ();
 						newGameState.NextPlayer ();
@@ -156,6 +155,16 @@ public class BoardController : MonoBehaviour {
 					hasPieceSelected = true;
 					firstClickPos = position;
 				}
+			}
+		}
+	}
+
+	static void RemovePiecesIfKing(Piece piece){
+		if (piece.GetKind() == ItemKind.KING) {
+			Piece[] piecesTobeRemoved = gameController.GetCurrentState ().GetPieces (piece.GetPlayer ());
+			//List<Position> piecePositions = new List<Position> ();
+			foreach (Piece p in piecesTobeRemoved) {
+				Destroy (GameObject.Find (p.GetPosition().ToString ()).transform.GetChild (0).gameObject);
 			}
 		}
 	}

@@ -14,7 +14,7 @@ public class GameState : IEnumerable<Piece> {
 	private Position actorPosition;
 	private Position targetPosition; 
 
-	private bool[] activePlayers = { true, false, true, false };
+	private bool[] activePlayers = { true, true, true, true };
 	public GameState(){ // provisory contructor
 	
 	}
@@ -79,6 +79,8 @@ public class GameState : IEnumerable<Piece> {
 	}
 
 	public void MovePiece(Position oldPosition, Position newPosition, bool destroy){
+		Piece targetPiece = board.GetPiece (newPosition);
+
 		Piece piece = board.GetPiece (oldPosition);
 		piece.SetPosition (newPosition);
 		board.SetPiece (newPosition, piece);
@@ -87,10 +89,10 @@ public class GameState : IEnumerable<Piece> {
 		pieces = board.GetPieces ();
 
 		if (destroy) {
-			Piece targetPiece = board.GetPiece (newPosition);
-			if (targetPiece.GetKind () == ItemKind.KING)
+			ItemKind targetKind = targetPiece.GetKind ();
+
+			if (targetKind == ItemKind.KING)
 				RemovePlayer (targetPiece.GetPlayer() );
-		
 		}
 	}
 	private void RemovePiece(Position position){
@@ -115,10 +117,8 @@ public class GameState : IEnumerable<Piece> {
 		pieces = tempPieces.ToArray ();
 		board = new Board (pieces);
 
-
 	}
 		
-
 	public override string ToString(){
 		string result = "";
 		foreach (Piece p in pieces) {
