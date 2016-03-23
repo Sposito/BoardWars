@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{14FD6FB8-A7CC-1BC8-0664-50B4454CB56B}") = "BoardWars", "Assembly-CSharp.csproj", "{F68753A5-87BF-8CD4-59CF-16B3DEAD4CA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F68753A5-87BF-8CD4-59CF-16B3DEAD4CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68753A5-87BF-8CD4-59CF-16B3DEAD4CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68753A5-87BF-8CD4-59CF-16B3DEAD4CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68753A5-87BF-8CD4-59CF-16B3DEAD4CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
