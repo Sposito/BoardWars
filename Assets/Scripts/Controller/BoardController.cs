@@ -27,11 +27,6 @@ public class BoardController : MonoBehaviour {
 
 	}
 
-	public static GameState GetCurrentState(){
-		return  gameController.GetCurrentState();
-	}
-
-
 	void Update(){
 		
 	}
@@ -40,6 +35,7 @@ public class BoardController : MonoBehaviour {
 		squares = squareBehaviours;
 	
 	}
+
 	public static void SetHighlightSquare(Position position){
 		if (hasPieceSelected)
 			return;
@@ -51,7 +47,7 @@ public class BoardController : MonoBehaviour {
 
 		}
 		else {
-			Player currentPlayer = gameController.GetCurrentState ().GetCurrentPlayer ();
+			Player currentPlayer = GetCurrentPlayer ();
 			Player piecePlayer = gameController.GetPiecebyPos (position).GetPlayer ();
 			ClearHighliths ();
 
@@ -185,5 +181,13 @@ public class BoardController : MonoBehaviour {
 			pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
 
 		}
+	}
+
+	public static GameState GetCurrentState(){
+		return gameController.GetCurrentState ();
+	}
+
+	public static Player GetCurrentPlayer(){
+		return GetCurrentState ().GetCurrentPlayer ();
 	}
 }
