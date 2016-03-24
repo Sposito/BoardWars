@@ -25,6 +25,14 @@ public class Piece: Item  {
 		return name;
 	}
 
+	public int GetTotalHP(){
+		return totalHp;
+	}
+
+	public int GetHP(){
+		return hp;
+	}
+
 	public int GetAttack(){
 		return attack;
 	}
@@ -64,6 +72,8 @@ public class Piece: Item  {
 			return false;
 		}
 	}
+
+
 	public Piece(string name, ItemKind kind, Player player, int hp, int attack, Item core, Item shell, Enchantment enchantment){
 		this.name = name;
 		this.kind = kind;

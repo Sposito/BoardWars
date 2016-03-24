@@ -77,6 +77,7 @@ public class BuildBoard : MonoBehaviour {
 	public void AddPieces(){
 		GameState gameState = BoardController.GetCurrentState ();
 		GameObject pieceGO = (GameObject)Resources.Load ("Prefabs/piece");
+			
 		foreach (Piece p in gameState) {
 			string name = p.GetPosition ().ToString ();
 			GameObject currentPiece = (GameObject)Instantiate (pieceGO, transform.Find (name).position, Quaternion.identity);
@@ -86,7 +87,6 @@ public class BuildBoard : MonoBehaviour {
 			pieceBehaviour.SetPieceKind (p.GetKind ());
 			pieceBehaviour.SetPlayer (p.GetPlayer ());
 			pieceBehaviour.BuildPiece ();
-
 		}
 
 	}

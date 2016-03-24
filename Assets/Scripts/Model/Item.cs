@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//ELEMENTS: fire ☲🜂㊋ water ☵🜄㊌  earth ☷🜃㊏ metal㊎ wood㊍
 public enum Elements{WATER,FIRE,WOOD,METAL,EARTH}
 public class Item  {
 

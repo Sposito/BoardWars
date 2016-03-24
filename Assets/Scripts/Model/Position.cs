@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 public enum Directions{N,NE,E,SE,S,SW,W,NW}
 
 public class Position  {
@@ -83,4 +84,15 @@ public class Position  {
 		string letters = "ABCDEFGH";
 		return "" + letters [x] + (y+1);
 	} 
+	/// <summary> Retuns a Position object from a string, like "A1" >> Position{0,0}</summary>
+	public static Position FromString(string position){
+		Dictionary<char,int> letters = new Dictionary<char,int> (){
+			{ 'A',0 }, { 'B',1 }, { 'C',2 }, { 'D',3 },
+			{ 'E',4 }, { 'F',5 }, { 'G',6 }, { 'H',7 } 
+		};
+		int x = letters [position [0]];
+		int y = int.Parse (position [1].ToString ()) - 1;
+		return new Position (x, y);
+
+	}
 }

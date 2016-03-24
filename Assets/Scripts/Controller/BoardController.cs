@@ -12,6 +12,8 @@ public class BoardController : MonoBehaviour {
 	private static BoardMap redHighlight;
 	private static BoardMap blueHighlight;
 
+	public GameObject GUI;
+
 	private static bool hasPieceSelected = false;
 
 	private static Position firstClickPos;
@@ -21,6 +23,8 @@ public class BoardController : MonoBehaviour {
 	void Start(){
 		gameController = new GameController ();
 		gameObject.AddComponent<BuildBoard> ();
+		GUI.SetActive (true);
+
 	}
 
 	public static GameState GetCurrentState(){
@@ -98,6 +102,7 @@ public class BoardController : MonoBehaviour {
 		Piece piece = gameController.GetPiecebyPos (position);
 		if (hasPieceSelected) {
 			if (highlight.GetTile (position.X, position.Y)) {
+				//MoveIfIsanEmptyTile (piece, position);
 				if (piece == null) {
 					GameState newGameState = gameController.GetCurrentState ();
 					newGameState.MovePiece (firstClickPos, position, false);
@@ -107,8 +112,7 @@ public class BoardController : MonoBehaviour {
 					GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
 					pieceGameObject.transform.position = position.ToScenePosition ();
 					pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
-					//GameObject.Find(firstClickPos.ToString()).transform.position = position.ToScenePosition ();
-					//GameObject.Find("Board").GetComponent<BuildBoard>().AddPieces(false);
+
 				}
 
 				else {
@@ -166,6 +170,20 @@ public class BoardController : MonoBehaviour {
 			foreach (Piece p in piecesTobeRemoved) {
 				Destroy (GameObject.Find (p.GetPosition().ToString ()).transform.GetChild (0).gameObject);
 			}
+		}
+	}
+
+	static void MoveIfIsanEmptyTile(Piece piece, Position position){
+		if (piece == null) {
+			GameState newGameState = gameController.GetCurrentState ();
+			newGameState.MovePiece (firstClickPos, position, false);
+			newGameState.NextPlayer ();
+			gameController.AddGameState (newGameState);
+
+			GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+			pieceGameObject.transform.position = position.ToScenePosition ();
+			pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
+
 		}
 	}
 }

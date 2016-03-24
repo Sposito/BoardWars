@@ -10,7 +10,13 @@ public class PieceBehaviour : MonoBehaviour {
 	public static string[] names;
 
 	public Player player;
-	public Piece piece;
+	public Piece piece{
+		get{ 
+			string positionString = transform.parent.gameObject.name;
+			Position position =  Position.FromString (positionString); 
+			return BoardController.GetCurrentState ().GetPiecebyPosition (position);
+		}
+	}
 	public ItemKind pieceKind;
 	public Color baseColor = Color.white;
 	public Color detailColor = Color.gray;
