@@ -21,7 +21,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 		rectTranform = GetComponent<RectTransform> ();
 	
 		lock (this) { 
-			Piece[] pieces = BoardController.GetCurrentState ().GetPieces ();
+			Piece[] pieces = BoardController.GetPieces ();
 			Piece piece = pieces [assignNo++];
 			position = piece.GetPosition ();
 		}
@@ -35,7 +35,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 	
 	public void BuildBar(Position pos){
 		position = pos;
-		totalHP = BoardController.GetCurrentState ().GetPiecebyPosition (position).GetTotalHP ();
+		totalHP = BoardController.GetPiece(position).GetTotalHP ();
 		for (int i = 1; i < totalHP; i++) {
 			GameObject newBar = (GameObject)Instantiate (barGO, Vector3.zero,	Quaternion.identity);
 			newBar.transform.SetParent (transform);

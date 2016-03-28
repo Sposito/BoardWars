@@ -14,7 +14,7 @@ public class PieceBehaviour : MonoBehaviour {
 		get{ 
 			string positionString = transform.parent.gameObject.name;
 			Position position =  Position.FromString (positionString); 
-			return BoardController.GetCurrentState ().GetPiecebyPosition (position);
+			return BoardController.GetPiece(position);
 		}
 	}
 	public ItemKind pieceKind;
@@ -58,10 +58,10 @@ public class PieceBehaviour : MonoBehaviour {
 		this.player = player;
 	}
 
-	public void Move(Position position){
-		transform.position = position.ToScenePosition ();
-		transform.SetParent (GameObject.Find (position.ToString ()).transform);
-	}
+//	public void Move(Position position){
+//		transform.position = position.ToScenePosition ();
+//		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+//	}
 	public void BuildPiece(){
 		string baseName = pieceKind.ToString() + "_Base";
 		string detailName = pieceKind.ToString() + "_Detail";
@@ -73,5 +73,220 @@ public class PieceBehaviour : MonoBehaviour {
 		transform.GetChild (1).GetComponent<SpriteRenderer> ().color = detailColor;
 
 		//GetComponent<SpriteRenderer> ().color = 
+	}
+
+	public void Move(Position position){
+		StartCoroutine(MoveToPosition(position));
+	}
+
+	public void MoveAndDestroy(MoveAndDestroyMessage message){
+		
+		StartCoroutine(MoveToPositionAndDestroy(message));
+
+	}
+
+	public void MoveAndBack(Position position){
+		StartCoroutine(MoveAndBackToPosition(position));
+	}
+
+	private IEnumerator MoveToPositionAndDestroy(MoveAndDestroyMessage message){
+		Position position = message.position;
+		float speed = 1f;
+
+		Vector3 startPosition = transform.position;
+		Vector3 endPosition = position.ToScenePosition ();
+		Vector3 startPositionAbove = transform.position + Vector3.up * BoardController.ySpacing;
+		Vector3 endPositionAbove = endPosition  + Vector3.up * BoardController.ySpacing;
+
+	
+		float moveDistance = (endPositionAbove - startPositionAbove).sqrMagnitude;
+		float baseDistance = (Vector3.right * BoardController.xSpacing).sqrMagnitude;
+		moveDistance = moveDistance / baseDistance;
+
+		float progress = 0f;
+
+		MoveLayer (+500);
+
+		while (transform.position != startPositionAbove) {
+			float distance = startPositionAbove.magnitude - startPosition.magnitude;
+			transform.position = Vector3.Lerp (startPosition, startPositionAbove, progress);
+			progress += speed * 4 * Time.deltaTime ;
+			print (progress);
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+		progress = 0f;
+
+
+		while (transform.position != endPositionAbove) {
+			transform.position = Vector3.MoveTowards (transform.position, endPositionAbove, .5f);
+			yield return new WaitForEndOfFrame();
+		}
+
+
+		while (transform.position != endPosition) {
+			transform.position = Vector3.Lerp (endPositionAbove, endPosition, progress);
+			progress += speed * 3*Time.deltaTime ;
+
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+		SetLayer (position);
+		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+		Destroy (message.gameObject);
+	}
+
+	private IEnumerator MoveToPosition(Position position){
+		float speed = 1f;
+
+		Vector3 startPosition = transform.position;
+		Vector3 endPosition = position.ToScenePosition ();
+		Vector3 startPositionAbove = transform.position + Vector3.up * BoardController.ySpacing;
+		Vector3 endPositionAbove = endPosition  + Vector3.up * BoardController.ySpacing;
+
+
+		float moveDistance = (endPositionAbove - startPositionAbove).sqrMagnitude;
+		float baseDistance = (Vector3.right * BoardController.xSpacing).sqrMagnitude;
+		moveDistance = moveDistance / baseDistance;
+
+		float progress = 0f;
+
+		MoveLayer (+500);
+
+		while (transform.position != startPositionAbove) {
+			float distance = startPositionAbove.magnitude - startPosition.magnitude;
+			transform.position = Vector3.Lerp (startPosition, startPositionAbove, progress);
+			progress += speed * 4 * Time.deltaTime ;
+			print (progress);
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+		progress = 0f;
+
+
+		while (transform.position != endPositionAbove) {
+			transform.position = Vector3.MoveTowards (transform.position, endPositionAbove, .5f);
+			yield return new WaitForEndOfFrame();
+		}
+
+
+		while (transform.position != endPosition) {
+			transform.position = Vector3.Lerp (endPositionAbove, endPosition, progress);
+			progress += speed * 3*Time.deltaTime ;
+
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+		SetLayer (position);
+		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+	}
+	
+
+
+	private IEnumerator MoveAndBackToPosition(Position position){
+		float speed = 1f;
+
+		Vector3 startPosition = transform.position;
+		Vector3 endPosition = position.ToScenePosition ();
+		Vector3 startPositionAbove = transform.position + Vector3.up * BoardController.ySpacing;
+		Vector3 endPositionAbove = endPosition  + Vector3.up * BoardController.ySpacing;
+
+
+		float moveDistance = (endPositionAbove - startPositionAbove).sqrMagnitude;
+		float baseDistance = (Vector3.right * BoardController.xSpacing).sqrMagnitude;
+		moveDistance = moveDistance / baseDistance;
+
+		float progress = 0f;
+
+		MoveLayer (+500);
+
+		while (transform.position != startPositionAbove) {
+			float distance = startPositionAbove.magnitude - startPosition.magnitude;
+			transform.position = Vector3.Lerp (startPosition, startPositionAbove, progress);
+			progress += speed * 4 * Time.deltaTime ;
+			print (progress);
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+		progress = 0f;
+
+
+		while (transform.position != endPositionAbove) {
+			transform.position = Vector3.MoveTowards (transform.position, endPositionAbove, .5f);
+			yield return new WaitForEndOfFrame();
+		}
+
+
+		while (transform.position != endPosition) {
+			transform.position = Vector3.Lerp (endPositionAbove, endPosition, progress);
+			progress += speed * 3*Time.deltaTime ;
+			print (progress);
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		while (transform.position != endPositionAbove) {
+			transform.position = Vector3.Lerp ( endPosition,endPositionAbove, progress);
+			progress += speed * 3*Time.deltaTime ;
+			print (progress);
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		while (transform.position != startPositionAbove) {
+			transform.position = Vector3.MoveTowards (transform.position, startPositionAbove, .5f);
+			yield return new WaitForEndOfFrame();
+		}
+
+		while (transform.position != startPosition) {
+			
+			transform.position = Vector3.Lerp ( startPositionAbove,startPosition, progress);
+			progress += speed * 4 * Time.deltaTime ;
+			print (progress);
+			if (progress > 1f)
+				progress = 1f;
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		SetLayer (position);
+		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+	}
+
+	private void MoveLayer(int amount){
+		GetComponent<SpriteRenderer> ().sortingOrder += amount;
+		transform.GetChild (0).GetComponent<SpriteRenderer> ().sortingOrder += amount;
+		transform.GetChild (1).GetComponent<SpriteRenderer> ().sortingOrder += amount;
+	}
+
+	private void SetLayer(Position position){
+		GetComponent<SpriteRenderer> ().sortingOrder = 100 + position.GetOrderLayer();
+		transform.GetChild (0).GetComponent<SpriteRenderer> ().sortingOrder = 101 + position.GetOrderLayer ();
+		transform.GetChild (1).GetComponent<SpriteRenderer> ().sortingOrder = 102 + position.GetOrderLayer();
+	}
+
+
+}
+
+public struct MoveAndDestroyMessage{
+	public GameObject gameObject;
+	public Position position;
+	public MoveAndDestroyMessage (GameObject gameObject, Position position){
+		this.gameObject = gameObject;
+		this.position = position;
 	}
 }

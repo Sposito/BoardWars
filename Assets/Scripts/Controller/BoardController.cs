@@ -76,15 +76,15 @@ public class BoardController : MonoBehaviour {
 	}
 
 	public static BoardMap GetEnemiesMap(Player player ){
-		return BoardMap.OcuppiedEnemyPlaces (GetCurrentState ().GetPieces (), player);
+		return BoardMap.OcuppiedEnemyPlaces (GetPieces (), player);
 	}
 
 	public static BoardMap GetPiecessMap(){
-		return BoardMap.OcuppiedPlaces (GetCurrentState ().GetPieces ());
+		return BoardMap.OcuppiedPlaces (GetPieces ());
 	}
 
 	public static BoardMap GetPiecessMap(Player player){
-		Piece[] pieces = GetCurrentState ().GetPieces (player);
+		Piece[] pieces = GetPieces (player);
 		return BoardMap.OcuppiedPlaces (pieces);
 	}
 
@@ -100,15 +100,16 @@ public class BoardController : MonoBehaviour {
 			if (highlight.GetTile (position.X, position.Y)) {
 				//MoveIfIsanEmptyTile (piece, position);
 				if (piece == null) {
-					GameState newGameState = gameController.GetCurrentState ();
-					newGameState.MovePiece (firstClickPos, position, false);
-					newGameState.NextPlayer ();
-					gameController.AddGameState (newGameState);
-
-					GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-					pieceGameObject.transform.position = position.ToScenePosition ();
-					pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
-
+//					GameState newGameState = gameController.GetCurrentState ();
+//					newGameState.MovePiece (firstClickPos, position, false);
+//					newGameState.NextPlayer ();
+//					gameController.AddGameState (newGameState);
+//
+//					GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+//					pieceGameObject.transform.position = position.ToScenePosition ();
+//					pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
+					MoveIfIsanEmptyTile (piece, position);
+					print (gameController.GetGameJSON ());
 				}
 
 				else {
@@ -122,19 +123,26 @@ public class BoardController : MonoBehaviour {
 						newGameState.NextPlayer ();
 						gameController.AddGameState (newGameState);
 
-						Destroy (GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject);
+
+
 						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-						pieceGameObject.transform.position = position.ToScenePosition ();
-						pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
-
-						print ("destroyed");
+						GameObject pieceGO = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
+						pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndDestroy (new MoveAndDestroyMessage(pieceGO, position));
 
 
+//						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+//						pieceGameObject.transform.position = position.ToScenePosition ();
+//						pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
+
+					
 
 					} else {
 						GameState newGameState = gameController.GetCurrentState ();
 						newGameState.NextPlayer ();
 						gameController.AddGameState (newGameState);
+
+						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+						pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndBack (position);
 					}
 						
 				
@@ -148,7 +156,7 @@ public class BoardController : MonoBehaviour {
 			
 			if (piece != null) {
 				Player player = piece.GetPlayer ();
-				Player currentPlayer = GetCurrentState ().GetCurrentPlayer ();
+				Player currentPlayer = GetCurrentPlayer ();
 		 
 				if (player == currentPlayer && !piece.Movement.Highlight.IsEmpty) {
 					print ("Click");
@@ -171,14 +179,16 @@ public class BoardController : MonoBehaviour {
 
 	static void MoveIfIsanEmptyTile(Piece piece, Position position){
 		if (piece == null) {
+			//INTERNAL LOGIC
 			GameState newGameState = gameController.GetCurrentState ();
 			newGameState.MovePiece (firstClickPos, position, false);
 			newGameState.NextPlayer ();
 			gameController.AddGameState (newGameState);
 
+			//SCENE LOGIC
 			GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-			pieceGameObject.transform.position = position.ToScenePosition ();
-			pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
+			pieceGameObject.GetComponent<PieceBehaviour> ().Move (position);
+		
 
 		}
 	}
@@ -189,5 +199,17 @@ public class BoardController : MonoBehaviour {
 
 	public static Player GetCurrentPlayer(){
 		return GetCurrentState ().GetCurrentPlayer ();
+	}
+
+	public static Piece[] GetPieces(){
+		return GetCurrentState ().GetPieces ();
+	}
+
+	public static Piece[] GetPieces(Player player){
+		return GetCurrentState ().GetPieces (player);
+	}
+
+	public static Piece GetPiece(Position position){
+		return GetCurrentState ().GetPiecebyPosition (position);
 	}
 }

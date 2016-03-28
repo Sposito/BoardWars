@@ -49,13 +49,16 @@
      <Compile Include="Assets\GenerateLifeBars.cs" />
      <Compile Include="Assets\LifeBarBehaviour.cs" />
      <Compile Include="Assets\PieceSpawner.cs" />
+     <Compile Include="Assets\Scenes\TileCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\CloudsController.cs" />
+     <Compile Include="Assets\Scripts\Controller\BaseCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardMapPrevew.cs" />
      <Compile Include="Assets\Scripts\Controller\BuildBoard.cs" />
      <Compile Include="Assets\Scripts\Controller\CameraIntro.cs" />
      <Compile Include="Assets\Scripts\Controller\CloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\PieceBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Controller\SpriteOnStageChecker.cs" />
      <Compile Include="Assets\Scripts\Controller\SquareBehaviour.cs" />
      <Compile Include="Assets\Scripts\Deprecated\PieceDrag.cs" />
      <Compile Include="Assets\Scripts\Hex.cs" />
