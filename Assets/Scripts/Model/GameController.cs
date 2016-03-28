@@ -47,4 +47,8 @@ public class GameController  {
 		}
 		return result;
 	}
+
+	public string GetGameJSON(){
+		return JsonUtility.ToJson (gameStates.ToArray(), true);
+	}
 }
