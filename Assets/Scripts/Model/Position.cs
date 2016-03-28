@@ -95,4 +95,8 @@ public class Position  {
 		return new Position (x, y);
 
 	}
+
+	public int GetOrderLayer(){
+		return 7 + x - y; 
+	}
 }
