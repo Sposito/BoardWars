@@ -60,23 +60,21 @@ public class LifeBarBehaviour : MonoBehaviour {
 			Destroy (gameObject);
 		else {
 			transform.position = pieceToFollow.transform.position + Vector3.down * 1.07f;
-			UpdateLife ();
+			PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
+			if (pieceBehaviour.piece != null)
+				UpdateLife (pieceBehaviour);
 		}
 	}
 
-void	UpdateLife(){
-		try{
-			int hp = pieceToFollow.GetComponent<PieceBehaviour>().piece.GetHP();
+	void	UpdateLife(PieceBehaviour pieceBehaviour){
+		
+			int hp = pieceBehaviour.piece.GetHP();
 			if (lastHP != hp){
 				lastHP = hp;
 
 					transform.GetChild(totalHP - hp - 1).gameObject.GetComponent<Image>().color = Color.black;
 				
 			}
-		}
-		catch{
-
-		}
 	}
 
 }
