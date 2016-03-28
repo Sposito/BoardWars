@@ -9,6 +9,9 @@ public class PieceBehaviour : MonoBehaviour {
 	static Sprite[] sprites;
 	public static string[] names;
 
+	public AudioClip destroyAudioClip;
+	public AudioClip KnockAudioClip;
+
 	public Player player;
 	public Piece piece{
 		get{ 
@@ -111,7 +114,6 @@ public class PieceBehaviour : MonoBehaviour {
 			float distance = startPositionAbove.magnitude - startPosition.magnitude;
 			transform.position = Vector3.Lerp (startPosition, startPositionAbove, progress);
 			progress += speed * 4 * Time.deltaTime ;
-			print (progress);
 			if (progress > 1f)
 				progress = 1f;
 
@@ -119,12 +121,10 @@ public class PieceBehaviour : MonoBehaviour {
 		}
 		progress = 0f;
 
-
 		while (transform.position != endPositionAbove) {
 			transform.position = Vector3.MoveTowards (transform.position, endPositionAbove, .5f);
 			yield return new WaitForEndOfFrame();
 		}
-
 
 		while (transform.position != endPosition) {
 			transform.position = Vector3.Lerp (endPositionAbove, endPosition, progress);
@@ -137,7 +137,7 @@ public class PieceBehaviour : MonoBehaviour {
 		}
 		SetLayer (position);
 		transform.SetParent (GameObject.Find (position.ToString ()).transform);
-		Destroy (message.gameObject);
+		message.gameObject.GetComponent<PieceBehaviour> ().StartCoroutine ("DestroyPiece");
 	}
 
 	private IEnumerator MoveToPosition(Position position){
@@ -161,7 +161,6 @@ public class PieceBehaviour : MonoBehaviour {
 			float distance = startPositionAbove.magnitude - startPosition.magnitude;
 			transform.position = Vector3.Lerp (startPosition, startPositionAbove, progress);
 			progress += speed * 4 * Time.deltaTime ;
-			print (progress);
 			if (progress > 1f)
 				progress = 1f;
 
@@ -187,6 +186,7 @@ public class PieceBehaviour : MonoBehaviour {
 		}
 		SetLayer (position);
 		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+		PlayKnockSound ();
 	}
 	
 
@@ -212,7 +212,6 @@ public class PieceBehaviour : MonoBehaviour {
 			float distance = startPositionAbove.magnitude - startPosition.magnitude;
 			transform.position = Vector3.Lerp (startPosition, startPositionAbove, progress);
 			progress += speed * 4 * Time.deltaTime ;
-			print (progress);
 			if (progress > 1f)
 				progress = 1f;
 
@@ -230,7 +229,7 @@ public class PieceBehaviour : MonoBehaviour {
 		while (transform.position != endPosition) {
 			transform.position = Vector3.Lerp (endPositionAbove, endPosition, progress);
 			progress += speed * 3*Time.deltaTime ;
-			print (progress);
+
 			if (progress > 1f)
 				progress = 1f;
 
@@ -240,7 +239,6 @@ public class PieceBehaviour : MonoBehaviour {
 		while (transform.position != endPositionAbove) {
 			transform.position = Vector3.Lerp ( endPosition,endPositionAbove, progress);
 			progress += speed * 3*Time.deltaTime ;
-			print (progress);
 			if (progress > 1f)
 				progress = 1f;
 
@@ -256,7 +254,6 @@ public class PieceBehaviour : MonoBehaviour {
 			
 			transform.position = Vector3.Lerp ( startPositionAbove,startPosition, progress);
 			progress += speed * 4 * Time.deltaTime ;
-			print (progress);
 			if (progress > 1f)
 				progress = 1f;
 
@@ -279,6 +276,28 @@ public class PieceBehaviour : MonoBehaviour {
 		transform.GetChild (1).GetComponent<SpriteRenderer> ().sortingOrder = 102 + position.GetOrderLayer();
 	}
 
+	public void PlayDestroySound(){
+		AudioSource source = GetComponent<AudioSource> ();
+		source.clip = destroyAudioClip;
+		source.pitch += UnityEngine.Random.Range (-0.2f, 0f);
+		source.Play ();
+	}
+
+	public void PlayKnockSound(){
+		AudioSource source = GetComponent<AudioSource> ();
+		source.clip = KnockAudioClip;
+		source.pitch += UnityEngine.Random.Range (-0.2f, 0f);
+		source.Play ();
+	}
+
+	public IEnumerator DestroyPiece(){
+		float delay = UnityEngine.Random.Range (0f, 0.1f);
+		AudioSource source = GetComponent<AudioSource> ();
+		Invoke("PlayDestroySound", delay);
+		PlayDestroySound ();
+		yield return new WaitForSeconds (source.clip.length + delay);
+		Destroy (gameObject);
+	}
 
 }
 

@@ -47,12 +47,12 @@ public class SquareBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-		//print (gameObject.name);
+		
 		BoardController.SetHighlightSquare (position);
 	}
 
 	void OnMouseDown(){
-		//print (gameObject.name);
+
 		BoardController.Click (position);
 	}
 
@@ -75,4 +75,6 @@ public class SquareBehaviour : MonoBehaviour {
 			yield return new WaitForEndOfFrame ();
 		}
 	}
+
+
 }

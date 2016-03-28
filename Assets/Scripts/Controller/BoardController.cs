@@ -24,16 +24,10 @@ public class BoardController : MonoBehaviour {
 		gameController = new GameController ();
 		gameObject.AddComponent<BuildBoard> ();
 		GUI.SetActive (true);
-
-	}
-
-	void Update(){
-		
 	}
 
 	public void SetSquareBehaviours(SquareBehaviour[] squareBehaviours){
 		squares = squareBehaviours;
-	
 	}
 
 	public static void SetHighlightSquare(Position position){
@@ -57,20 +51,16 @@ public class BoardController : MonoBehaviour {
 			}
 				
 			HighlightMap (highlight);
-
 		}
 	}
 		
 	public static void HighlightMap( BoardMap map){
-		
-		//map = BoardMap.Cross(x,y);
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if (map.GetTile(i,j))
 					squares[j + (i * 8)].Select();
 				else
 					squares[j + (i * 8)].UnSelect();
-					
 			}
 		}
 	}
@@ -100,16 +90,7 @@ public class BoardController : MonoBehaviour {
 			if (highlight.GetTile (position.X, position.Y)) {
 				//MoveIfIsanEmptyTile (piece, position);
 				if (piece == null) {
-//					GameState newGameState = gameController.GetCurrentState ();
-//					newGameState.MovePiece (firstClickPos, position, false);
-//					newGameState.NextPlayer ();
-//					gameController.AddGameState (newGameState);
-//
-//					GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-//					pieceGameObject.transform.position = position.ToScenePosition ();
-//					pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
 					MoveIfIsanEmptyTile (piece, position);
-					print (gameController.GetGameJSON ());
 				}
 
 				else {
@@ -119,22 +100,12 @@ public class BoardController : MonoBehaviour {
 
 						GameState newGameState = gameController.GetCurrentState ();
 						newGameState.MovePiece (firstClickPos, position, true);
-						//newGameState.MovePiece (position, firstClickPos);
 						newGameState.NextPlayer ();
 						gameController.AddGameState (newGameState);
-
-
 
 						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
 						GameObject pieceGO = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
 						pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndDestroy (new MoveAndDestroyMessage(pieceGO, position));
-
-
-//						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-//						pieceGameObject.transform.position = position.ToScenePosition ();
-//						pieceGameObject.transform.SetParent (GameObject.Find (position.ToString ()).transform);
-
-					
 
 					} else {
 						GameState newGameState = gameController.GetCurrentState ();
@@ -144,22 +115,16 @@ public class BoardController : MonoBehaviour {
 						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
 						pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndBack (position);
 					}
-						
-				
 				}
 			}
 			hasPieceSelected = false;
-			print (gameController.GetStringStates ());
 		} 
 
 		else {
-			
 			if (piece != null) {
 				Player player = piece.GetPlayer ();
 				Player currentPlayer = GetCurrentPlayer ();
-		 
 				if (player == currentPlayer && !piece.Movement.Highlight.IsEmpty) {
-					print ("Click");
 					hasPieceSelected = true;
 					firstClickPos = position;
 				}
@@ -172,7 +137,10 @@ public class BoardController : MonoBehaviour {
 			Piece[] piecesTobeRemoved = gameController.GetCurrentState ().GetPieces (piece.GetPlayer ());
 			//List<Position> piecePositions = new List<Position> ();
 			foreach (Piece p in piecesTobeRemoved) {
-				Destroy (GameObject.Find (p.GetPosition().ToString ()).transform.GetChild (0).gameObject);
+				if (p.GetKind () != ItemKind.KING) { // AVOIDS NULL REFERENCE EXCEPTION CAUSED BY TRYING TO REMOVE THE KING TWICE
+					GameObject go = GameObject.Find (p.GetPosition ().ToString ()).transform.GetChild (0).gameObject;
+					go.GetComponent<PieceBehaviour> ().StartCoroutine ("DestroyPiece");
+				}
 			}
 		}
 	}
@@ -188,8 +156,6 @@ public class BoardController : MonoBehaviour {
 			//SCENE LOGIC
 			GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
 			pieceGameObject.GetComponent<PieceBehaviour> ().Move (position);
-		
-
 		}
 	}
 
