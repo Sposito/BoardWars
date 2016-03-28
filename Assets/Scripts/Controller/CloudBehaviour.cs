@@ -5,6 +5,8 @@ public class CloudBehaviour : MonoBehaviour {
 
 	public Vector2 speed;
 	public bool customScale = false;
+
+
 	void Start () {
 		Rn ();
 	}
@@ -20,6 +22,11 @@ public class CloudBehaviour : MonoBehaviour {
 		speed *= .001f;
 		if(!customScale)
 			transform.localScale = Random.Range (0.9f, 1.4f) * Vector3.one;
+		
+	}
+
+
+	void RespawnCloud(){
 		
 	}
 }

@@ -9,7 +9,7 @@ public class GUIController : MonoBehaviour {
 	// Update is called once per frame
 
 	public static void BuildInfo(){
-		Piece[] pieces = BoardController.GetCurrentState ().GetPieces ();
+		Piece[] pieces = BoardController.GetPieces ();
 
 		foreach (Piece p in pieces) {
 			GUIs.Add( (GameObject)Instantiate(GameObject.Find("LifeBar"),p.GetPosition().ToScenePosition(),Quaternion.identity));
