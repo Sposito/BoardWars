@@ -7,6 +7,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 	GameObject barGO;
 	RectTransform rectTranform;
 	List<Image> barSprites;
+	bool isDestroyed = false;
 
 	GameObject pieceToFollow;
 	static int assignNo = 0;
@@ -56,25 +57,29 @@ public class LifeBarBehaviour : MonoBehaviour {
 	}
 
 	void Update(){ //TODO: OPTIMIZATION >>> TAKE IT OUT OF UPDATE WILL SAVE SOME CYCLES;
-		if (pieceToFollow == null)
+		if (pieceToFollow == null) {
 			Destroy (gameObject);
+			isDestroyed = true;
+		}
 		else {
 			transform.position = pieceToFollow.transform.position + Vector3.down * 1.07f;
 			PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
-			if (pieceBehaviour.piece != null)
-				UpdateLife (pieceBehaviour);
+			if (pieceBehaviour.piece != null && !isDestroyed)
+				UpdateLife ();
 		}
 	}
 
-	void	UpdateLife(PieceBehaviour pieceBehaviour){
-		
-			int hp = pieceBehaviour.piece.GetHP();
+	void UpdateLife(){
+			//PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
+
+			int hp = pieceToFollow.GetComponent<PieceBehaviour> ().piece.GetHP();
 			if (lastHP != hp){
 				lastHP = hp;
 
-					transform.GetChild(totalHP - hp - 1).gameObject.GetComponent<Image>().color = Color.black;
+			bool rangeCheck = (totalHP - hp - 1) <= totalHP && (totalHP - hp - 1) >= 0; //TODO: UNDERSTAND WHAT IS GOING ON HERE!!!
 				
+			if(rangeCheck)
+					transform.GetChild(totalHP - hp-1).gameObject.GetComponent<Image>().color = Color.black;
 			}
 	}
-
 }

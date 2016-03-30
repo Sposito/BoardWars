@@ -4,8 +4,7 @@ using GeneralTools;
 using System;
 
 public class PieceBehaviour : MonoBehaviour {
-	//public enum Player {Player1,Player2,Player3,Player4}
-
+	
 	static Sprite[] sprites;
 	public static string[] names;
 
@@ -293,6 +292,9 @@ public class PieceBehaviour : MonoBehaviour {
 	public IEnumerator DestroyPiece(){
 		float delay = UnityEngine.Random.Range (0f, 0.1f);
 		AudioSource source = GetComponent<AudioSource> ();
+		GetComponent<SpriteRenderer> ().enabled = false;
+		transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ().enabled = false; //TODO: Abstract this weird path. keep a reference to the child GO is a good idea
+		transform.GetChild(1).gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 		Invoke("PlayDestroySound", delay);
 		PlayDestroySound ();
 		yield return new WaitForSeconds (source.clip.length + delay);

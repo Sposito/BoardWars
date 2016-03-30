@@ -49,8 +49,12 @@ public class BoardController : MonoBehaviour {
 				blueHighlight = BoardMap.SinglePosition (position);
 				highlight = gameController.GetPiecebyPos (position).Movement.Highlight;
 			}
-				
-			HighlightMap (highlight);
+			try{	
+				HighlightMap (highlight);
+			}
+			catch{
+			
+			}
 		}
 	}
 		
@@ -96,6 +100,7 @@ public class BoardController : MonoBehaviour {
 				else {
 					if (piece.ReceiveHit (gameController.GetPiecebyPos (firstClickPos))) { // here we make the test and update the hp
 						//Remove all gameobjects if a king is captured
+
 						RemovePiecesIfKing(piece);
 
 						GameState newGameState = gameController.GetCurrentState ();
@@ -103,11 +108,13 @@ public class BoardController : MonoBehaviour {
 						newGameState.NextPlayer ();
 						gameController.AddGameState (newGameState);
 
-						GameObject pieceGameObject = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-						GameObject pieceGO = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
-						pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndDestroy (new MoveAndDestroyMessage(pieceGO, position));
+						GameObject attackerPieceGO = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+						GameObject defenderPieceGO = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
+						attackerPieceGO.GetComponent<PieceBehaviour> ().MoveAndDestroy (new MoveAndDestroyMessage(defenderPieceGO, position));
 
-					} else {
+					} 
+
+					else {
 						GameState newGameState = gameController.GetCurrentState ();
 						newGameState.NextPlayer ();
 						gameController.AddGameState (newGameState);
