@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+enum States{PRESELECTION, PIECECHOICE, TARGETCHOICE,POSELECTION}
 public class BoardController : MonoBehaviour {
 	static SquareBehaviour[] squares;
 	static BoardMap map;
@@ -11,6 +13,7 @@ public class BoardController : MonoBehaviour {
 	private static BoardMap highlight;
 	private static BoardMap redHighlight;
 	private static BoardMap blueHighlight;
+	private static BoardMap playerHighlight;
 
 	public GameObject GUI;
 
@@ -38,6 +41,7 @@ public class BoardController : MonoBehaviour {
 		if (piece == null) {
 			ClearHighliths();
 			highlight = BoardMap.SinglePosition (position);
+			HighlightMap (highlight, Color.white);
 
 		}
 		else {
@@ -48,7 +52,8 @@ public class BoardController : MonoBehaviour {
 			if (currentPlayer == piecePlayer) {
 				blueHighlight = BoardMap.SinglePosition (position);
 				highlight = gameController.GetPiecebyPos (position).Movement.Highlight;
-			}
+			} 
+		
 			try{	
 				HighlightMap (highlight);
 			}
@@ -63,6 +68,17 @@ public class BoardController : MonoBehaviour {
 			for(int j = 0; j < 8; j++){
 				if (map.GetTile(i,j))
 					squares[j + (i * 8)].Select();
+				else
+					squares[j + (i * 8)].UnSelect();
+			}
+		}
+	}
+
+	public static void HighlightMap( BoardMap map, Color color){
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+				if (map.GetTile(i,j))
+					squares[j + (i * 8)].Select(color);
 				else
 					squares[j + (i * 8)].UnSelect();
 			}

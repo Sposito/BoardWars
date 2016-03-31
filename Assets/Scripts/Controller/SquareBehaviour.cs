@@ -46,6 +46,14 @@ public class SquareBehaviour : MonoBehaviour {
 
 	}
 
+	public void Select(Color color){
+		//spriteRenderer.color = baseColor;
+		//		StopCoroutine ("BrightOn");
+		//		StartCoroutine("BrightOff");
+		spriteRenderer.color = color;
+
+	}
+
 	void OnMouseEnter(){
 		
 		BoardController.SetHighlightSquare (position);
