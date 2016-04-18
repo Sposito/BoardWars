@@ -45,31 +45,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GUIController.cs" />
-     <Compile Include="Assets\GenerateLifeBars.cs" />
-     <Compile Include="Assets\LifeBarBehaviour.cs" />
-     <Compile Include="Assets\MoveGUICloud.cs" />
-     <Compile Include="Assets\PieceSpawner.cs" />
      <Compile Include="Assets\Scenes\TileCloudBehaviour.cs" />
-     <Compile Include="Assets\Scripts\CloudsController.cs" />
      <Compile Include="Assets\Scripts\Controller\BaseCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardMapPrevew.cs" />
      <Compile Include="Assets\Scripts\Controller\BuildBoard.cs" />
      <Compile Include="Assets\Scripts\Controller\CameraIntro.cs" />
      <Compile Include="Assets\Scripts\Controller\CloudBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Controller\CloudsController.cs" />
+     <Compile Include="Assets\Scripts\Controller\GUIController.cs" />
+     <Compile Include="Assets\Scripts\Controller\GenerateLifeBars.cs" />
+     <Compile Include="Assets\Scripts\Controller\LifeBarBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Controller\MoveGUICloud.cs" />
      <Compile Include="Assets\Scripts\Controller\PieceBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Controller\PieceSpawner.cs" />
      <Compile Include="Assets\Scripts\Controller\SpriteOnStageChecker.cs" />
      <Compile Include="Assets\Scripts\Controller\SquareBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\StatusPannelController.cs" />
      <Compile Include="Assets\Scripts\Deprecated\PieceDrag.cs" />
-     <Compile Include="Assets\Scripts\Hex.cs" />
      <Compile Include="Assets\Scripts\Model\Board.cs" />
      <Compile Include="Assets\Scripts\Model\BoardMap.cs" />
      <Compile Include="Assets\Scripts\Model\Element.cs" />
      <Compile Include="Assets\Scripts\Model\Enchantment.cs" />
      <Compile Include="Assets\Scripts\Model\GameController.cs" />
      <Compile Include="Assets\Scripts\Model\GameState.cs" />
+     <Compile Include="Assets\Scripts\Model\Hex.cs" />
      <Compile Include="Assets\Scripts\Model\InitialGameStateBuilder.cs" />
      <Compile Include="Assets\Scripts\Model\InitialStateBuilder.cs" />
      <Compile Include="Assets\Scripts\Model\Item.cs" />
@@ -77,7 +77,6 @@
      <Compile Include="Assets\Scripts\Model\MovementBehaviourFactory.cs" />
      <Compile Include="Assets\Scripts\Model\Piece.cs" />
      <Compile Include="Assets\Scripts\Model\Position.cs" />
-     <Compile Include="Assets\TypeTest.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
