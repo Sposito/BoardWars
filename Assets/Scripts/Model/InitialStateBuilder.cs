@@ -10,7 +10,7 @@ public class InitialStateBuilder  {
 	}
 	public static Piece[] HardCodedBuild(){
 
-
+		//PLAYER 1
 		Piece[] pieces = new Piece[32];
 		int i = 0;
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.ROOK,   Player.PLAYER1, 0, 0); i++;
@@ -20,7 +20,7 @@ public class InitialStateBuilder  {
 		for(int j = 0; j< 4; j++){
 			pieces [i] = Piece.BuildStadardWoodPiece (ItemKind.PAWN,   Player.PLAYER1, 1, j); i++;
 		}
-
+		//PLAYER 2
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.ROOK,   Player.PLAYER2, 0, 7); i++;
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.KNIGHT, Player.PLAYER2, 1, 7); i++;
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.MAGE,   Player.PLAYER2, 2, 7); i++;
@@ -28,7 +28,7 @@ public class InitialStateBuilder  {
 		for(int j = 0; j< 4; j++){
 			pieces [i] = Piece.BuildStadardWoodPiece (ItemKind.PAWN,   Player.PLAYER2, j, 6); i++;
 		}
-
+		//PLAYER 3
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.ROOK,   Player.PLAYER3, 7, 7); i++;
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.KNIGHT, Player.PLAYER3, 7, 6); i++;
 		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.MAGE,   Player.PLAYER3, 7, 5); i++;
@@ -36,13 +36,13 @@ public class InitialStateBuilder  {
 		for(int j = 0; j < 4 ; j++){ 
 			pieces [i] = Piece.BuildStadardWoodPiece (ItemKind.PAWN,   Player.PLAYER3, 6, 7-j); i++;
 		}
-
-		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.ROOK,   Player.PLAYER4, 7, 0); i++;
-		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.KNIGHT, Player.PLAYER4, 6, 0); i++;
-		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.MAGE,   Player.PLAYER4, 5, 0); i++;
-		pieces [i] = Piece.BuildStadardWoodPiece     (ItemKind.KING,   Player.PLAYER4, 4, 0); i++;
+		//PLAYER 4
+		pieces [i] = Piece.BuildStadardIcePiece     (ItemKind.ROOK,   Player.PLAYER4, 7, 0); i++;
+		pieces [i] = Piece.BuildStadardIcePiece     (ItemKind.KNIGHT, Player.PLAYER4, 6, 0); i++;
+		pieces [i] = Piece.BuildStadardIcePiece     (ItemKind.MAGE,   Player.PLAYER4, 5, 0); i++;
+		pieces [i] = Piece.BuildStadardIcePiece     (ItemKind.KING,   Player.PLAYER4, 4, 0); i++;
 		for(int j = 0; j < 4 ; j++){ 
-			pieces [i] = Piece.BuildStadardWoodPiece (ItemKind.PAWN,   Player.PLAYER4, 7-j, 1); i++;
+			pieces [i] = Piece.BuildStadardIcePiece (ItemKind.PAWN,   Player.PLAYER4, 7-j, 1); i++;
 		}
 
 		return pieces;

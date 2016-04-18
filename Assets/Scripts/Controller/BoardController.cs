@@ -6,6 +6,9 @@ enum States{PRESELECTION, PIECECHOICE, TARGETCHOICE,POSELECTION}
 public class BoardController : MonoBehaviour {
 	static SquareBehaviour[] squares;
 	static BoardMap map;
+	public static Piece currentPiece;
+
+
 
 	public readonly static float xSpacing = 2.07f;
 	public readonly static float ySpacing = 1.69f;
@@ -34,6 +37,7 @@ public class BoardController : MonoBehaviour {
 	}
 
 	public static void SetHighlightSquare(Position position){
+		currentPiece = GetPiece (position);
 		if (hasPieceSelected)
 			return;
 		
@@ -41,7 +45,7 @@ public class BoardController : MonoBehaviour {
 		if (piece == null) {
 			ClearHighliths();
 			highlight = BoardMap.SinglePosition (position);
-			HighlightMap (highlight, Color.white);
+			HighlightMap (highlight, GeneralTools.Hex.ToColor ("EAD562FF"));
 
 		}
 		else {
@@ -201,4 +205,6 @@ public class BoardController : MonoBehaviour {
 	public static Piece GetPiece(Position position){
 		return GetCurrentState ().GetPiecebyPosition (position);
 	}
+
+
 }

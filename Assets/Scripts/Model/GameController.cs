@@ -29,6 +29,7 @@ public class GameController  {
 //
 //		gameStates = temporaryGameStates;
 		gameStates.Add(gameState);
+
 	}
 
 	public GameState GetCurrentState(){
@@ -38,6 +39,10 @@ public class GameController  {
 
 	public Piece GetPiecebyPos(Position position){
 		return GetCurrentState ().GetPiecebyPosition (position);
+	}
+
+	public Player GetCurrentPlayer(){
+		return GetCurrentState ().GetCurrentPlayer ();
 	}
 
 	public string GetStringStates(){

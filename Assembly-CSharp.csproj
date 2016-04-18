@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scenes\TileCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BaseCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardMapPrevew.cs" />
@@ -62,6 +61,7 @@
      <Compile Include="Assets\Scripts\Controller\SpriteOnStageChecker.cs" />
      <Compile Include="Assets\Scripts\Controller\SquareBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\StatusPannelController.cs" />
+     <Compile Include="Assets\Scripts\Controller\TileCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Deprecated\PieceDrag.cs" />
      <Compile Include="Assets\Scripts\Model\Board.cs" />
      <Compile Include="Assets\Scripts\Model\BoardMap.cs" />

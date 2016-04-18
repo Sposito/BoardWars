@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//ELEMENTS: fire ☲🜂㊋ water ☵🜄㊌  earth ☷🜃㊏ metal㊎ wood㊍
-public enum Elements{WATER,FIRE,WOOD,METAL,EARTH}
+
 public class Item  {
 
 	private float quality;
@@ -40,5 +39,9 @@ public class Item  {
 
 	public static Item Brass(){
 		return new Item ("Brass", Elements.METAL, .5f);
+	}
+
+	public static Item Ice(){
+		return new Item ("Ice", Elements.WATER, .5f);
 	}
 }

@@ -22,7 +22,7 @@ public class PieceBehaviour : MonoBehaviour {
 	public ItemKind pieceKind;
 	public Color baseColor = Color.white;
 	public Color detailColor = Color.gray;
-	public Color[] playersColor = new Color[4];
+	public static Color[] playersColor = new Color[4];
 
 	static private bool spriteLoaded = false;
 
