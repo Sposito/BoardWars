@@ -48,6 +48,7 @@
      <Compile Include="Assets\GUIController.cs" />
      <Compile Include="Assets\GenerateLifeBars.cs" />
      <Compile Include="Assets\LifeBarBehaviour.cs" />
+     <Compile Include="Assets\MoveGUICloud.cs" />
      <Compile Include="Assets\PieceSpawner.cs" />
      <Compile Include="Assets\Scenes\TileCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\CloudsController.cs" />
@@ -60,10 +61,12 @@
      <Compile Include="Assets\Scripts\Controller\PieceBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\SpriteOnStageChecker.cs" />
      <Compile Include="Assets\Scripts\Controller\SquareBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Controller\StatusPannelController.cs" />
      <Compile Include="Assets\Scripts\Deprecated\PieceDrag.cs" />
      <Compile Include="Assets\Scripts\Hex.cs" />
      <Compile Include="Assets\Scripts\Model\Board.cs" />
      <Compile Include="Assets\Scripts\Model\BoardMap.cs" />
+     <Compile Include="Assets\Scripts\Model\Element.cs" />
      <Compile Include="Assets\Scripts\Model\Enchantment.cs" />
      <Compile Include="Assets\Scripts\Model\GameController.cs" />
      <Compile Include="Assets\Scripts\Model\GameState.cs" />
