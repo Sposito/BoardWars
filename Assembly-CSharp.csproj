@@ -46,10 +46,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AdjustScaleByResolution.cs" />
-     <Compile Include="Assets\BreathBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BaseCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardMapPrevew.cs" />
+     <Compile Include="Assets\Scripts\Controller\BreathBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BuildBoard.cs" />
      <Compile Include="Assets\Scripts\Controller\CameraIntro.cs" />
      <Compile Include="Assets\Scripts\Controller\CloudBehaviour.cs" />
