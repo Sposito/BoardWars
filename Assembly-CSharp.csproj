@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AdjustScaleByResolution.cs" />
+     <Compile Include="Assets\BreathBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BaseCloudBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardController.cs" />
      <Compile Include="Assets\Scripts\Controller\BoardMapPrevew.cs" />
@@ -55,6 +57,7 @@
      <Compile Include="Assets\Scripts\Controller\GUIController.cs" />
      <Compile Include="Assets\Scripts\Controller\GenerateLifeBars.cs" />
      <Compile Include="Assets\Scripts\Controller\LifeBarBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Controller\LightiningController.cs" />
      <Compile Include="Assets\Scripts\Controller\MoveGUICloud.cs" />
      <Compile Include="Assets\Scripts\Controller\PieceBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\PieceSpawner.cs" />
@@ -82,12 +85,6 @@
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.iOS.Extensions.Xcode">
- <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.iOS.Extensions.Common">
- <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

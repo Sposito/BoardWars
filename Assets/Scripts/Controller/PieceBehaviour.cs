@@ -260,7 +260,7 @@ public class PieceBehaviour : MonoBehaviour {
 		}
 
 		SetLayer (position);
-		transform.SetParent (GameObject.Find (position.ToString ()).transform);
+		//transform.SetParent (GameObject.Find (position.ToString ()).transform);
 	}
 
 	private void MoveLayer(int amount){

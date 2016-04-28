@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 public class GameState : IEnumerable<Piece> {
 
-	private Piece[] pieces;
-	Board board;
-	private Player currentPlayer;
-	private float time;
+	protected Piece[] pieces;
+	protected Board board;
+	protected Player currentPlayer;
+	protected float time;
 
 
-	private Position actorPosition;
+	protected Position actorPosition;
 	private Position targetPosition; 
 
-	private bool[] activePlayers = { true, true, true, true };
+	protected bool[] activePlayers = { true, true, true, true };
 	public GameState(){ // provisory contructor
 	
 	}
@@ -35,6 +35,16 @@ public class GameState : IEnumerable<Piece> {
 
 		this.actorPosition = actorPosition;
 		this.targetPosition = targetPosition;
+
+		board = new Board (pieces);
+	}
+	public GameState(GameState g){
+		this.pieces = g.pieces;
+		this.currentPlayer = g.currentPlayer;
+		this.time = g.time;
+
+		this.actorPosition = g.actorPosition;
+		this.targetPosition = g.targetPosition;
 
 		board = new Board (pieces);
 	}
@@ -124,6 +134,12 @@ public class GameState : IEnumerable<Piece> {
 		foreach (Piece p in pieces) {
 			result += p.GetPlayer().ToString() + " " + p.GetName() + " : " + p.GetPosition().ToString() + "\n";
 		}
+
 		return result;
 	}
+
+	public int ToUID (){
+		return GetHashCode();
+	}
+
 }

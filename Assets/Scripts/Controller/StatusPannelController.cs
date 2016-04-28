@@ -20,8 +20,8 @@ public class StatusPannelController : MonoBehaviour {
 		elementShellIcon = transform.FindChild ("Element Def").GetComponent<Image> ();
 		elementCoreText = transform.FindChild ("Core Text").GetComponent<Text> ();
 		elementShellText = transform.FindChild ("Shell Text").GetComponent<Text> ();
-		currentPlayer =transform.FindChild ("CurrentPlayer").GetComponent<Text> ();
-		playerBanner = transform.FindChild ("PlayerBanner").GetComponent<Image> ();
+		currentPlayer = GameObject.Find("CurrentPlayer").GetComponent<Text> ();
+		playerBanner = GameObject.Find("PlayerBanner").GetComponent<Image> ();
 
 	}
 	

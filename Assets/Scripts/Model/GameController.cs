@@ -5,9 +5,8 @@ using System;
 public class GameController  {
 	public readonly static float xSpacing = 2.07f;
 	public readonly static float ySpacing = 1.69f;
-
-	private  readonly List<GameState> gameStates;
-
+	[SerializeField]
+	private  List<GameState> gameStates;
 
 	public GameController(){
 		gameStates = new List<GameState> ();
@@ -28,8 +27,8 @@ public class GameController  {
 //
 //
 //		gameStates = temporaryGameStates;
-		gameStates.Add(gameState);
 
+		gameStates.Add(gameState);
 	}
 
 	public GameState GetCurrentState(){
@@ -45,15 +44,21 @@ public class GameController  {
 		return GetCurrentState ().GetCurrentPlayer ();
 	}
 
-	public string GetStringStates(){
-		string result = "";
-		foreach (GameState gS in gameStates) {
-			result += gS.ToString() + "\n\n";
-		}
-		return result;
-	}
+
 
 	public string GetGameJSON(){
 		return JsonUtility.ToJson (gameStates.ToArray(), true);
+	}
+
+	public bool CheckIfIsSamePlayer(Position a, Position b){
+		return (GetPiecebyPos (a).GetPlayer () == GetPiecebyPos (b).GetPlayer () );
+	}
+	public string GetStringStates(){
+		string result = "";
+		foreach (GameState s in gameStates) {
+			result += s.ToUID() + "\n";
+			result += s.ToString() + "\n";
+		}
+		return result;
 	}
 }
