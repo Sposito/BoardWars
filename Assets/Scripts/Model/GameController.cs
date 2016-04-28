@@ -6,10 +6,9 @@ public class GameController  {
 	public readonly static float xSpacing = 2.07f;
 	public readonly static float ySpacing = 1.69f;
 	[SerializeField]
-	private  List<GameState> gameStates;
+	private  GameState gameState;
 
 	public GameController(){
-		gameStates = new List<GameState> ();
 		AddGameState(InitialStateBuilder.CreateInitialGameState () );
 	}
 
@@ -18,22 +17,12 @@ public class GameController  {
 //	}
 
 	public void AddGameState(GameState gameState){
-//		int lenght = (gameStates == null) ? 0 : gameStates.Length;
-//		GameState[] temporaryGameStates = new GameState[lenght + 1];
-//		for (int i = 0; i < lenght; i++) {
-//			temporaryGameStates [i] = gameStates [i];
-//		}
-//		temporaryGameStates [temporaryGameStates.Length - 1] = gameState;
-//
-//
-//		gameStates = temporaryGameStates;
-
-		gameStates.Add(gameState);
+		this.gameState = gameState;
 	}
 
 	public GameState GetCurrentState(){
 	//	return gameStates [gameStates.Length - 1];
-		return gameStates[gameStates.Count -1];
+		return gameState;
 	}
 
 	public Piece GetPiecebyPos(Position position){
@@ -47,7 +36,7 @@ public class GameController  {
 
 
 	public string GetGameJSON(){
-		return JsonUtility.ToJson (gameStates.ToArray(), true);
+		return JsonUtility.ToJson (gameState, true);
 	}
 
 	public bool CheckIfIsSamePlayer(Position a, Position b){
@@ -55,10 +44,10 @@ public class GameController  {
 	}
 	public string GetStringStates(){
 		string result = "";
-		foreach (GameState s in gameStates) {
-			result += s.ToUID() + "\n";
-			result += s.ToString() + "\n";
-		}
+
+		result += gameState.ToUID() + "\n";
+		result += gameState.ToString() + "\n";
+
 		return result;
 	}
 }

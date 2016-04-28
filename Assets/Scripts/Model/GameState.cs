@@ -14,7 +14,7 @@ public class GameState : IEnumerable<Piece> {
 	protected Position actorPosition;
 	private Position targetPosition; 
 
-	protected bool[] activePlayers = { true, true, true, true };
+	protected bool[] activePlayers;
 	public GameState(){ // provisory contructor
 	
 	}
@@ -36,6 +36,11 @@ public class GameState : IEnumerable<Piece> {
 		this.actorPosition = actorPosition;
 		this.targetPosition = targetPosition;
 
+		//Initialize activeplayers vector
+		this.activePlayers = new bool[4];
+		for (int i = 0; i < activePlayers.Length; i++)
+			this.activePlayers [i] = true;
+
 		board = new Board (pieces);
 	}
 	public GameState(GameState g){
@@ -45,6 +50,8 @@ public class GameState : IEnumerable<Piece> {
 
 		this.actorPosition = g.actorPosition;
 		this.targetPosition = g.targetPosition;
+
+		this.activePlayers = g.activePlayers;
 
 		board = new Board (pieces);
 	}
@@ -131,6 +138,12 @@ public class GameState : IEnumerable<Piece> {
 		
 	public override string ToString(){
 		string result = "";
+
+		for (int i = 0; i < 4; i++) {
+			if (activePlayers [i])
+				result += "Player " + (i + 1) + " active   | ";
+		}
+		result += "\n";
 		foreach (Piece p in pieces) {
 			result += p.GetPlayer().ToString() + " " + p.GetName() + " : " + p.GetPosition().ToString() + "\n";
 		}
