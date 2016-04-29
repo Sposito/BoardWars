@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c21ed9db86a38487d81170e4884df381
-timeCreated: 1460649922
+timeCreated: 1461956308
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -192,7 +192,7 @@ TextureImporter:
         height: 497
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 96, y: 208, z: 105, w: 175}
       outline:
       - - {x: -229, y: 248.5}
         - {x: -229, y: -248.5}
@@ -246,19 +246,18 @@ TextureImporter:
         x: 659
         y: 535
         width: 457
-        height: 457
+        height: 497
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 91, y: 0, z: 89, w: 0}
       outline:
-      - - {x: -215.5, y: 228.5}
-        - {x: -228.5, y: 208.5}
-        - {x: -228.5, y: -214.5}
-        - {x: -220.5, y: -228.5}
-        - {x: 214.5, y: -228.5}
-        - {x: 228.5, y: -227.5}
-        - {x: 228.5, y: 212.5}
-        - {x: 217.5, y: 228.5}
+      - - {x: -205.5, y: 210.5}
+        - {x: -228.5, y: 194.5}
+        - {x: -228.5, y: -248.5}
+        - {x: 227.5, y: -248.5}
+        - {x: 228.5, y: -235.5}
+        - {x: 228.5, y: 199.5}
+        - {x: 209.5, y: 210.5}
       tessellationDetail: 0
     - name: Circle
       rect:

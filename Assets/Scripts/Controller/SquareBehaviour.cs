@@ -29,29 +29,19 @@ public class SquareBehaviour : MonoBehaviour {
 	}
 
 	public void UnSelect(){
-//		StopCoroutine ("BrightOff");
-//		StartCoroutine("BrightOn");
-
-		//spriteRenderer.color = Color.white;
-	spriteRenderer.color = baseColor;
-
-
+		if(spriteRenderer != null) //Avoid null reference errors if spriteRender is not initialized
+			spriteRenderer.color = baseColor;
 	}
 
 	public void Select(){
-		//spriteRenderer.color = baseColor;
-//		StopCoroutine ("BrightOn");
-//		StartCoroutine("BrightOff");
-		spriteRenderer.color = GeneralTools.Hex.ToColor("F7FE82");
+		if(spriteRenderer != null) //Avoid null reference errors if spriteRender is not initialized
+			spriteRenderer.color = GeneralTools.Hex.ToColor("F7FE82");
 
 	}
 
 	public void Select(Color color){
-		//spriteRenderer.color = baseColor;
-		//		StopCoroutine ("BrightOn");
-		//		StartCoroutine("BrightOff");
-		spriteRenderer.color = color;
-
+		if(spriteRenderer != null) //Avoid null reference errors if spriteRender is not initialized
+			spriteRenderer.color = color;
 	}
 
 	void OnMouseEnter(){

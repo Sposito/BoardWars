@@ -150,10 +150,11 @@ public class BoardController : MonoBehaviour {
 	public static void HighlightMap( BoardMap map){
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				if (map.GetTile(i,j))
-					squares[j + (i * 8)].Select();
-				else
-					squares[j + (i * 8)].UnSelect();
+				int p = j + (i * 8); // p is the linear postion in the array
+				if (map.GetTile (i, j)) 
+					squares [p].Select ();
+				else 
+					squares [p].UnSelect ();
 			}
 		}
 	}
@@ -161,10 +162,11 @@ public class BoardController : MonoBehaviour {
 	public static void HighlightMap( BoardMap map, Color color){
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				if (map.GetTile(i,j))
-					squares[j + (i * 8)].Select(color);
-				else
-					squares[j + (i * 8)].UnSelect();
+				int p = j + (i * 8); // p is the linear postion in the array
+				if (map.GetTile (i, j)) 
+					squares [p].Select (color);
+				else 
+					squares [p].UnSelect ();
 			}
 		}
 	}
@@ -252,5 +254,9 @@ public class BoardController : MonoBehaviour {
 			timeClock = Time.unscaledTime - timeClock;
 			uIController.GameOver (message.victoriousTeam);
 		}
+	}
+
+	public void RestartGame(){
+		UnityEngine.SceneManagement.SceneManager.LoadScene (0, UnityEngine.SceneManagement.LoadSceneMode.Single);
 	}
 }
