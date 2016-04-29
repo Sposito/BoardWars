@@ -15,6 +15,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 	int totalHP;
 	int lastHP;
 	public Position position = Position.zero;
+	Vector3 offset = new Vector3 (0f, -1.07f);
 
 	void Start () {
 		barGO = transform.GetChild (0).gameObject;
@@ -28,7 +29,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 		}
 
 		BuildBar (position);
-		transform.position = position.ToScenePosition () + Vector3.down * 1.07f;
+		transform.position = position.ToScenePosition () + offset;
 		pieceToFollow = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
 		lastHP = totalHP;
 		transform.localScale = new Vector3 (-1f, 1f, 1f);
@@ -56,13 +57,13 @@ public class LifeBarBehaviour : MonoBehaviour {
 
 	}
 
-	void Update(){ //TODO: OPTIMIZATION >>> TAKE IT OUT OF UPDATE WILL SAVE SOME CYCLES;
+	void Update(){ //TODO: OPTIMIZATION >>> TAKE IT OUT OF UPDATE WILL SAVE SEVERAL CYCLES;
 		if (pieceToFollow == null) {
 			Destroy (gameObject);
 			isDestroyed = true;
 		}
 		else {
-			transform.position = pieceToFollow.transform.position + Vector3.down * 1.07f;
+			transform.position = pieceToFollow.transform.position + offset;
 			PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
 			if (pieceBehaviour.piece != null && !isDestroyed)
 				UpdateLife ();
@@ -81,5 +82,9 @@ public class LifeBarBehaviour : MonoBehaviour {
 			if(rangeCheck)
 					transform.GetChild(totalHP - hp-1).gameObject.GetComponent<Image>().color = Color.black;
 			}
+	}
+
+	void OnDestroy(){
+		assignNo = 0;
 	}
 }
