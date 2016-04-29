@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+
+public enum Team{A, B, C, D};
 public class GameController  {
 	public readonly static float xSpacing = 2.07f;
 	public readonly static float ySpacing = 1.69f;
 	[SerializeField]
 	private  GameState gameState;
-
+	private int turnCounter = 0;
+	public int TotalTurns{get {return turnCounter;}}
 	public GameController(){
 		AddGameState(InitialStateBuilder.CreateInitialGameState () );
 	}
@@ -18,6 +21,7 @@ public class GameController  {
 
 	public void AddGameState(GameState gameState){
 		this.gameState = gameState;
+		turnCounter++;
 	}
 
 	public GameState GetCurrentState(){
@@ -42,6 +46,19 @@ public class GameController  {
 	public bool CheckIfIsSamePlayer(Position a, Position b){
 		return (GetPiecebyPos (a).GetPlayer () == GetPiecebyPos (b).GetPlayer () );
 	}
+
+	public EoGMessage TestForEndOfGame(){
+		ActivePlayers active = gameState.GetActivePlayers();
+
+		if (!active.isP1onGame && !active.isP3onGame)
+			return new EoGMessage (true, Team.B);
+
+		if(!active.isP2onGame && !active.isP4onGame)
+			return new EoGMessage (true, Team.A);
+
+		return new EoGMessage(false, Team.D);
+	}
+
 	public string GetStringStates(){
 		string result = "";
 
@@ -49,5 +66,15 @@ public class GameController  {
 		result += gameState.ToString() + "\n";
 
 		return result;
+	}
+}
+
+public struct EoGMessage{
+	public readonly bool gameOver;
+	public readonly Team victoriousTeam;
+
+	public EoGMessage (bool gameOver, Team victoriousTeam){
+		this.gameOver = gameOver;
+		this.victoriousTeam = victoriousTeam;
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 enum States{PRESELECTION, PIECECHOICE, TARGETCHOICE,POSELECTION}
 public class BoardController : MonoBehaviour {
+	#region GlobalVariables
 	static SquareBehaviour[] squares;
 	static BoardMap map;
 	public static Piece currentPiece;
@@ -19,23 +20,96 @@ public class BoardController : MonoBehaviour {
 	private static BoardMap playerHighlight;
 
 	public GameObject GUI;
+	public static UIController uIController;
 
 	private static bool hasPieceSelected = false;
 
 	private static Position firstClickPos;
 
+	private static Piece clickedPiece; //
+	private static Position clickedPosition;
+
 	static GameController gameController;
+
+	public static bool isGameRunning = false;
+
+	public static float timeClock;
+	#endregion
+
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			print(gameController.GetStringStates ());
 		}
 			
 	}
-	
+
 	void Start(){
 		gameController = new GameController ();
 		gameObject.AddComponent<BuildBoard> ();
 		GUI.SetActive (true);
+		isGameRunning = true;
+		uIController = GetComponent<UIController> ();
+		timeClock = Time.unscaledTime;
+
+	}
+		
+	public static void Click(Position position){
+		//the following two lines give class scope access to the actions taken by intern functions
+		clickedPiece = gameController.GetPiecebyPos (position);
+		clickedPosition = position;
+
+		if (hasPieceSelected) { // HAVE YOU SELECTED A VALID PIECE BEFORE?
+			if (highlight.GetTile (position.X, position.Y) ) {// HAVE YOU CLICKED IN A VALID MOVEABLE POSITION?
+				if (clickedPiece == null)  //THE VALID POSITION U CLICKED IS AN EMPTY TILE?
+					MoveIfIsanEmptyTile (clickedPiece, position); //JUST MOVE THE PIECE TO THERE
+				
+				else  //There is an attackable piece on the cliked postion
+					AttackPiece();
+			}
+			hasPieceSelected = false;
+		} 
+
+		else { // Here you select the current piece
+			if (clickedPiece != null) {
+				Player player = clickedPiece.GetPlayer ();
+				Player currentPlayer = GetCurrentPlayer ();
+				if (player == currentPlayer && !clickedPiece.Movement.Highlight.IsEmpty) {
+					hasPieceSelected = true;
+					firstClickPos = position;
+				}
+			}
+		}
+	}
+
+	static void AttackPiece(){
+		if (!gameController.CheckIfIsSamePlayer (firstClickPos, clickedPosition)) { // Check if the target isnt from you team TODO: WHEN WE HAVE HEALING WORKING THIS MAY BE A PROBLEM
+			if (clickedPiece.ReceiveHit (gameController.GetPiecebyPos (firstClickPos))) { // here we make the test and update the hp
+				//Remove all gameobjects if a king is captured
+
+				RemovePiecesIfKing (clickedPiece);
+
+				GameState newGameState = new GameState(gameController.GetCurrentState ());
+				newGameState.MovePiece (firstClickPos, clickedPosition, true);
+				newGameState.NextPlayer ();
+				gameController.AddGameState (newGameState);
+
+				GameObject attackerPieceGO = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
+				GameObject defenderPieceGO = GameObject.Find (clickedPosition.ToString ()).transform.GetChild (0).gameObject;
+				attackerPieceGO.GetComponent<PieceBehaviour> ().MoveAndDestroy (new MoveAndDestroyMessage (defenderPieceGO, clickedPosition));
+
+			} else {
+				GameState newGameState = new GameState(gameController.GetCurrentState ());
+				newGameState.NextPlayer ();
+
+				GameObject pieceGameObject = GetPieceGameOBjectbyPosition (firstClickPos);
+				gameController.AddGameState (newGameState);
+
+
+				pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndBack (clickedPosition);
+			}
+
+			TestForEndOfGame ();
+		}
 	}
 
 	public void SetSquareBehaviours(SquareBehaviour[] squareBehaviours){
@@ -46,7 +120,7 @@ public class BoardController : MonoBehaviour {
 		currentPiece = GetPiece (position);
 		if (hasPieceSelected)
 			return;
-		
+
 		Piece piece = gameController.GetPiecebyPos (position);
 		if (piece == null) {
 			ClearHighliths();
@@ -63,16 +137,16 @@ public class BoardController : MonoBehaviour {
 				blueHighlight = BoardMap.SinglePosition (position);
 				highlight = gameController.GetPiecebyPos (position).Movement.Highlight;
 			} 
-		
+
 			try{	
 				HighlightMap (highlight);
 			}
 			catch{
-			
+
 			}
 		}
 	}
-		
+
 	public static void HighlightMap( BoardMap map){
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
@@ -112,58 +186,8 @@ public class BoardController : MonoBehaviour {
 		highlight = BoardMap.Empty;
 		redHighlight = BoardMap.Empty;
 		blueHighlight = BoardMap.Empty;
-	}
 
-	public static void Click(Position position){
-		Piece piece = gameController.GetPiecebyPos (position);
-		if (hasPieceSelected) { // HAVE YOU SELECTED A VALID PIECE BEFORE?
-			if (highlight.GetTile (position.X, position.Y) ) {// HAVE YOU CLICKED IN A VALID MOVEABLE POSITION?
-				if (piece == null) { //THE VALID POSITION U CLICKED IS AN EMPTY TILE?
-					MoveIfIsanEmptyTile (piece, position); //JUST MOVE THE PIECE TO THERE
-				}
-
-				else { //It is not empty?
-					if (!gameController.CheckIfIsSamePlayer (firstClickPos, position)) { // Check if the target isnt from you team TODO: WHEN WE HAVE HEALING WORKING THIS MAY BE A PROBLEM
-						if (piece.ReceiveHit (gameController.GetPiecebyPos (firstClickPos))) { // here we make the test and update the hp
-							//Remove all gameobjects if a king is captured
-
-							RemovePiecesIfKing (piece);
-
-							GameState newGameState = new GameState(gameController.GetCurrentState ());
-							newGameState.MovePiece (firstClickPos, position, true);
-							newGameState.NextPlayer ();
-							gameController.AddGameState (newGameState);
-
-							GameObject attackerPieceGO = GameObject.Find (firstClickPos.ToString ()).transform.GetChild (0).gameObject;
-							GameObject defenderPieceGO = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
-							attackerPieceGO.GetComponent<PieceBehaviour> ().MoveAndDestroy (new MoveAndDestroyMessage (defenderPieceGO, position));
-
-						} else {
-							GameState newGameState = new GameState(gameController.GetCurrentState ());
-							newGameState.NextPlayer ();
-
-							GameObject pieceGameObject = GetPieceGameOBjectbyPosition (firstClickPos);
-							gameController.AddGameState (newGameState);
-
-
-							pieceGameObject.GetComponent<PieceBehaviour> ().MoveAndBack (position);
-						}
-					}
-				}
-			}
-			hasPieceSelected = false;
-		} 
-
-		else { // Here you select the current piece
-			if (piece != null) {
-				Player player = piece.GetPlayer ();
-				Player currentPlayer = GetCurrentPlayer ();
-				if (player == currentPlayer && !piece.Movement.Highlight.IsEmpty) {
-					hasPieceSelected = true;
-					firstClickPos = position;
-				}
-			}
-		}
+		HighlightMap (highlight);
 	}
 
 	static GameObject GetPieceGameOBjectbyPosition(Position position){
@@ -173,7 +197,7 @@ public class BoardController : MonoBehaviour {
 	static void RemovePiecesIfKing(Piece piece){
 		if (piece.GetKind() == ItemKind.KING) {
 			Piece[] piecesTobeRemoved = gameController.GetCurrentState ().GetPieces (piece.GetPlayer ());
-			//List<Position> piecePositions = new List<Position> ();
+
 			foreach (Piece p in piecesTobeRemoved) {
 				if (p.GetKind () != ItemKind.KING) { // AVOIDS NULL REFERENCE EXCEPTION CAUSED BY TRYING TO REMOVE THE KING TWICE
 					GameObject go = GameObject.Find (p.GetPosition ().ToString ()).transform.GetChild (0).gameObject;
@@ -216,5 +240,17 @@ public class BoardController : MonoBehaviour {
 	public static Piece GetPiece(Position position){
 		return GetCurrentState ().GetPiecebyPosition (position);
 	}
-		
+	public static int GetCurrentTurn(){
+		return gameController.TotalTurns;
+	}
+	public  static void TestForEndOfGame (){
+		EoGMessage message = gameController.TestForEndOfGame ();
+
+		if (message.gameOver) {
+			isGameRunning = false;
+			ClearHighliths ();
+			timeClock = Time.unscaledTime - timeClock;
+			uIController.GameOver (message.victoriousTeam);
+		}
+	}
 }

@@ -55,13 +55,13 @@ public class SquareBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-		
-		BoardController.SetHighlightSquare (position);
+		if(BoardController.isGameRunning)
+			BoardController.SetHighlightSquare (position);
 	}
 
 	void OnMouseDown(){
-
-		BoardController.Click (position);
+		if(BoardController.isGameRunning)
+			BoardController.Click (position);
 	}
 
 	IEnumerator BrightOn(){

@@ -56,7 +56,9 @@ public class GameState : IEnumerable<Piece> {
 		board = new Board (pieces);
 	}
 
-
+	public ActivePlayers GetActivePlayers(){
+		return new ActivePlayers (activePlayers);
+	}
 
 
 	public Piece[] GetPieces(){
@@ -155,4 +157,27 @@ public class GameState : IEnumerable<Piece> {
 		return GetHashCode();
 	}
 
+}
+
+public struct ActivePlayers{
+	public readonly bool isP1onGame;
+	public readonly bool isP2onGame;
+	public readonly bool isP3onGame;
+	public readonly bool isP4onGame;
+
+
+	public ActivePlayers (bool isP1onGame, bool isP2onGame, bool isP3onGame, bool isP4onGame){
+		this.isP1onGame = isP1onGame;
+		this.isP2onGame = isP2onGame;
+		this.isP3onGame = isP3onGame;
+		this.isP4onGame = isP4onGame;
+	}
+
+	public ActivePlayers (bool[] activePlayers){
+		this.isP1onGame = activePlayers[0];
+		this.isP2onGame = activePlayers[1];
+		this.isP3onGame = activePlayers[2];
+		this.isP4onGame = activePlayers[3];
+	}
+	
 }
