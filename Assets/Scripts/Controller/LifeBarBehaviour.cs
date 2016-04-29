@@ -10,17 +10,20 @@ public class LifeBarBehaviour : MonoBehaviour {
 	bool isDestroyed = false;
 
 	GameObject pieceToFollow;
+
 	static int assignNo = 0;
 
 	int totalHP;
 	int lastHP;
 	public Position position = Position.zero;
 	Vector3 offset = new Vector3 (0f, -1.07f);
+	PieceBehaviour pieceBehaviour;
 
 	void Start () {
 		barGO = transform.GetChild (0).gameObject;
 		//barSprites.Add(transform.GetChild (0).gameObject.GetComponent<Image>());
 		rectTranform = GetComponent<RectTransform> ();
+
 	
 		lock (this) { 
 			Piece[] pieces = BoardController.GetPieces ();
@@ -33,6 +36,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 		pieceToFollow = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
 		lastHP = totalHP;
 		transform.localScale = new Vector3 (-1f, 1f, 1f);
+		pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
 	}
 	
 	public void BuildBar(Position pos){
@@ -41,12 +45,11 @@ public class LifeBarBehaviour : MonoBehaviour {
 		for (int i = 1; i < totalHP; i++) {
 			GameObject newBar = (GameObject)Instantiate (barGO, Vector3.zero,	Quaternion.identity);
 			newBar.transform.SetParent (transform);
-//			barSprites.Add (newBar.GetComponent<Image>());
+
 		}
 		rectTranform.sizeDelta = new Vector2 (.5f * totalHP, rectTranform.sizeDelta.y);
 
-//		foreach (Image image in barSprites)
-//			image.color = Color.green;
+
 	}
 
 	void RestartBar(){
@@ -64,7 +67,7 @@ public class LifeBarBehaviour : MonoBehaviour {
 		}
 		else {
 			transform.position = pieceToFollow.transform.position + offset;
-			PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
+			//PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
 			if (pieceBehaviour.piece != null && !isDestroyed)
 				UpdateLife ();
 		}
@@ -73,15 +76,17 @@ public class LifeBarBehaviour : MonoBehaviour {
 	void UpdateLife(){
 			//PieceBehaviour pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
 
-			int hp = pieceToFollow.GetComponent<PieceBehaviour> ().piece.GetHP();
-			if (lastHP != hp){
-				lastHP = hp;
-
-			bool rangeCheck = (totalHP - hp - 1) <= totalHP && (totalHP - hp - 1) >= 0; //TODO: UNDERSTAND WHAT IS GOING ON HERE!!!
+		int hp = pieceBehaviour.piece.GetHP();
+		if (lastHP != hp){
+			lastHP = hp;
+			int marker = totalHP - hp - 1; // first black bar postion in the child hierarchy
+			bool rangeCheck = marker <= totalHP && marker >= 0; //assure if marker is valid child postion
 				
-			if(rangeCheck)
-					transform.GetChild(totalHP - hp-1).gameObject.GetComponent<Image>().color = Color.black;
+			if (rangeCheck) { //TODO: VER ISSO AQUI!
+				for(int i = 0; i <= marker; i++)
+					transform.GetChild (i).gameObject.GetComponent<Image> ().color = Color.black;
 			}
+		}
 	}
 
 	void OnDestroy(){
