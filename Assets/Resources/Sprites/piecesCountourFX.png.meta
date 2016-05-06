@@ -1,0 +1,345 @@
+fileFormatVersion: 2
+guid: 5569d5f9249944cb5b5ef34d00c876e5
+timeCreated: 1462027956
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PAWN_Glow
+    21300002: KNIGHT_Glow
+    21300004: MAGE_Glow
+    21300006: KING_Glow
+    21300008: QUEEN_Glow
+    21300010: ROOK_Glow
+    21300012: PAWN_Outline
+    21300014: KNIGHT_Outline
+    21300016: MAGE_Outline
+    21300018: KING_Outline
+    21300020: QUEEN_Outline
+    21300022: ROOK_Outline
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: PAWN_Glow
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63, y: -208}
+        - {x: -86, y: -228}
+        - {x: -86, y: -256}
+        - {x: 87, y: -256}
+        - {x: 87, y: -246}
+        - {x: 34, y: -208}
+      - - {x: -74, y: 182}
+        - {x: -183, y: 73}
+        - {x: -183, y: -134}
+        - {x: -111, y: -204}
+        - {x: 127, y: -204}
+        - {x: 189, y: -171}
+        - {x: 189, y: 61}
+        - {x: 124, y: 182}
+      tessellationDetail: 0
+    - name: KNIGHT_Glow
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -58, y: -215}
+        - {x: -90, y: -250}
+        - {x: -90, y: -256}
+        - {x: 90, y: -256}
+        - {x: 90, y: -253}
+        - {x: 65, y: -215}
+      - - {x: -80, y: 240}
+        - {x: -183, y: 211}
+        - {x: -183, y: -163}
+        - {x: -131, y: -204}
+        - {x: 181, y: -204}
+        - {x: 189, y: -163}
+        - {x: 189, y: 173}
+        - {x: 101, y: 240}
+      tessellationDetail: 0
+    - name: MAGE_Glow
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -183, y: 29}
+        - {x: -183, y: -172}
+        - {x: -168, y: -204}
+        - {x: 135, y: -204}
+        - {x: 189, y: -186}
+        - {x: 189, y: 93}
+        - {x: 156, y: 235}
+        - {x: -40, y: 235}
+        - {x: -171, y: 123}
+      tessellationDetail: 0
+    - name: KING_Glow
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 544
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47058824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 148, y: 212}
+        - {x: 54, y: 288}
+        - {x: -82, y: 288}
+        - {x: -183, y: 219}
+        - {x: -183, y: -160}
+        - {x: -171, y: -204}
+        - {x: 154, y: -204}
+        - {x: 165, y: -200}
+        - {x: 189, y: -117}
+        - {x: 189, y: 34}
+        - {x: 172, y: 144}
+      tessellationDetail: 0
+    - name: QUEEN_Glow
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 544
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47058824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -183, y: 288}
+        - {x: -183, y: -204}
+        - {x: 106, y: -204}
+        - {x: 189, y: -138}
+        - {x: 189, y: 250}
+        - {x: 90, y: 288}
+      tessellationDetail: 0
+    - name: ROOK_Glow
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -120, y: 255}
+        - {x: -183, y: 228}
+        - {x: -183, y: -133}
+        - {x: -161, y: -204}
+        - {x: 120, y: -204}
+        - {x: 189, y: -167}
+        - {x: 189, y: 126}
+        - {x: 142, y: 255}
+      tessellationDetail: 0
+    - name: PAWN_Outline
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: -247}
+        - {x: -33, y: -254}
+        - {x: -33, y: -256}
+        - {x: 9, y: -256}
+        - {x: 9, y: -255}
+        - {x: 6, y: -250}
+        - {x: -16, y: -247}
+      - - {x: 55, y: 144}
+        - {x: -78, y: 144}
+        - {x: -137, y: 71}
+        - {x: -140, y: 44}
+        - {x: -140, y: -109}
+        - {x: -54, y: -162}
+        - {x: -32, y: -162}
+        - {x: 70, y: -154}
+        - {x: 85, y: -146}
+        - {x: 147, y: -90}
+        - {x: 147, y: 41}
+      tessellationDetail: 0
+    - name: KNIGHT_Outline
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: -256}
+        - {x: 2, y: -253}
+        - {x: -2, y: -253}
+        - {x: -3, y: -256}
+      - - {x: -29, y: 202}
+        - {x: -112, y: 137}
+        - {x: -140, y: -46}
+        - {x: -140, y: -101}
+        - {x: -99, y: -162}
+        - {x: 66, y: -162}
+        - {x: 147, y: -116}
+        - {x: 147, y: 60}
+        - {x: 8, y: 202}
+      tessellationDetail: 0
+    - name: MAGE_Outline
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20, y: 192}
+        - {x: -140, y: 81}
+        - {x: -140, y: -97}
+        - {x: -107, y: -162}
+        - {x: 70, y: -162}
+        - {x: 72, y: -161}
+        - {x: 147, y: -72}
+        - {x: 147, y: -20}
+        - {x: 125, y: 192}
+      tessellationDetail: 0
+    - name: KING_Outline
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 544
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47058824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -76, y: 265}
+        - {x: -140, y: 207}
+        - {x: -140, y: -102}
+        - {x: -112, y: -162}
+        - {x: 127, y: -162}
+        - {x: 147, y: -100}
+        - {x: 147, y: 184}
+        - {x: 48, y: 265}
+      tessellationDetail: 0
+    - name: QUEEN_Outline
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 544
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47058824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -34, y: 259}
+        - {x: -107, y: 196}
+        - {x: -140, y: 96}
+        - {x: -140, y: -95}
+        - {x: -63, y: -162}
+        - {x: 8, y: -162}
+        - {x: 89, y: -151}
+        - {x: 147, y: -80}
+        - {x: 147, y: 130}
+        - {x: 51, y: 259}
+      tessellationDetail: 0
+    - name: ROOK_Outline
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: 218}
+        - {x: -27, y: 218}
+        - {x: -128, y: 116}
+        - {x: -140, y: -23}
+        - {x: -140, y: -95}
+        - {x: -63, y: -162}
+        - {x: 8, y: -162}
+        - {x: 89, y: -151}
+        - {x: 147, y: -81}
+        - {x: 147, y: 17}
+        - {x: 135, y: 115}
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

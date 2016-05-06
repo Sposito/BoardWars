@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 30c1a4e2eed29481295b2d88902f7906
+timeCreated: 1461975304
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: squareArrowBorder_0
+    21300002: squareArrowBorder_1
+    21300004: squareArrowBorder_2
+    21300006: squareArrowBorder_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: squareArrowBorder_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 124
+        width: 66
+        height: 98
+      alignment: 9
+      pivot: {x: 0.4803868, y: 0.5833292}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7.2944717, y: 40.83374}
+        - {x: -31.705528, y: 11.83374}
+        - {x: -31.705528, y: -22.16626}
+        - {x: 6.2944717, y: -57.16626}
+        - {x: 31.294472, y: -57.16626}
+        - {x: 34.29447, y: -56.16626}
+        - {x: 34.29447, y: 38.83374}
+        - {x: 33.29447, y: 40.83374}
+      tessellationDetail: 0
+    - name: squareArrowBorder_1
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 124
+        width: 68
+        height: 98
+      alignment: 9
+      pivot: {x: 0.5220624, y: 0.5949145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32.499756, y: 3.6983795}
+        - {x: -6.500244, y: 39.69838}
+        - {x: -26.500244, y: 39.69838}
+        - {x: -35.500244, y: 36.69838}
+        - {x: -35.500244, y: -54.30162}
+        - {x: -27.500244, y: -58.30162}
+        - {x: -12.500244, y: -58.30162}
+        - {x: 0.49975586, y: -48.30162}
+        - {x: 21.499756, y: -31.30162}
+        - {x: 32.499756, y: -21.30162}
+      tessellationDetail: 0
+    - name: squareArrowBorder_2
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 32
+        width: 102
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5058834, y: 0.6356402}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9.600105, y: 26.598267}
+        - {x: -51.600105, y: 0.5982666}
+        - {x: -51.600105, y: -41.401733}
+        - {x: -46.600105, y: -46.401733}
+        - {x: 47.399895, y: -46.401733}
+        - {x: 50.399895, y: -45.401733}
+        - {x: 50.399895, y: -9.401733}
+        - {x: 17.399895, y: 26.598267}
+      tessellationDetail: 0
+    - name: squareArrowBorder_3
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 35
+        width: 102
+        height: 71
+      alignment: 9
+      pivot: {x: 0.49705818, y: 0.5972}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44.699936, y: 28.5988}
+        - {x: -50.699936, y: 18.5988}
+        - {x: -50.699936, y: -5.4011993}
+        - {x: -49.699936, y: -7.4011993}
+        - {x: -5.699936, y: -42.4012}
+        - {x: 7.300064, y: -42.4012}
+        - {x: 51.300064, y: -15.401199}
+        - {x: 51.300064, y: 23.5988}
+        - {x: 50.300064, y: 28.5988}
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

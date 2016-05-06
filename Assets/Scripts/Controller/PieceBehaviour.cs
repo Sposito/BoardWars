@@ -5,8 +5,8 @@ using System;
 
 public class PieceBehaviour : MonoBehaviour {
 	
-	static Sprite[] sprites;
-	public static string[] names;
+	static SpritesheetMap piecesSSMap;
+	static SpritesheetMap contourSSMap;
 
 	public AudioClip destroyAudioClip;
 	public AudioClip KnockAudioClip;
@@ -26,22 +26,20 @@ public class PieceBehaviour : MonoBehaviour {
 
 	static private bool spriteLoaded = false;
 
-	// Use this for initialization
 	void Awake () {
-		playersColor [0] = Hex.ToColor ("B5677E");
-		playersColor [1] = Hex.ToColor ("677EB5");
-		playersColor [2] = Hex.ToColor ("69B89F");
-		playersColor [3] = Hex.ToColor ("B59C67");
+		SetPlayersColors ();
 
 		if (!spriteLoaded) {
 			LoadSprites ();
 			spriteLoaded = true;
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void SetPlayersColors(){
+		playersColor [0] = Hex.ToColor ("B5677E");
+		playersColor [1] = Hex.ToColor ("677EB5");
+		playersColor [2] = Hex.ToColor ("69B89F");
+		playersColor [3] = Hex.ToColor ("B59C67");
 	}
 
 	public void SetPieceKind(ItemKind kind){
@@ -49,32 +47,35 @@ public class PieceBehaviour : MonoBehaviour {
 	}
 
 	private void LoadSprites(){
-		sprites = Resources.LoadAll<Sprite> ("Sprites/pieces");
-		names = new string[sprites.Length];
-
-		for (int i = 0; i < sprites.Length; i++) 
-			names [i] = sprites [i].name;
+		piecesSSMap = new SpritesheetMap("Sprites/pieces");
+		contourSSMap = new SpritesheetMap("Sprites/piecesCountourFX");
 	}
 
 	public void SetPlayer (Player player){
 		this.player = player;
 	}
-
-//	public void Move(Position position){
-//		transform.position = position.ToScenePosition ();
-//		transform.SetParent (GameObject.Find (position.ToString ()).transform);
-//	}
+		
 	public void BuildPiece(){
 		string baseName = pieceKind.ToString() + "_Base";
 		string detailName = pieceKind.ToString() + "_Detail";
+		string outlineName = pieceKind.ToString() + "_Outline";
+		string glowName = pieceKind.ToString() + "_Glow";
 		GetComponent<SpriteRenderer> ().color = playersColor [(int) player];
 	
-		transform.GetChild(0).GetComponent<SpriteRenderer> ().sprite = sprites[Array.IndexOf (names, baseName)];
+		transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = piecesSSMap.GetByName (baseName);
 		transform.GetChild (0).GetComponent<SpriteRenderer> ().color = baseColor;
-		transform.GetChild(1).GetComponent<SpriteRenderer> ().sprite = sprites[Array.IndexOf (names, detailName)];
+		transform.GetChild(1).GetComponent<SpriteRenderer> ().sprite = piecesSSMap.GetByName (detailName);
 		transform.GetChild (1).GetComponent<SpriteRenderer> ().color = detailColor;
+		transform.GetChild(2).GetComponent<SpriteRenderer> ().sprite = contourSSMap.GetByName (outlineName);
+		transform.GetChild (2).gameObject.SetActive (false);
 
-		//GetComponent<SpriteRenderer> ().color = 
+
+
+
+	}
+
+	public void SetStroke(bool isStroked){
+		transform.GetChild (2).gameObject.SetActive (isStroked);
 	}
 
 	public void Move(Position position){
@@ -187,8 +188,6 @@ public class PieceBehaviour : MonoBehaviour {
 		transform.SetParent (GameObject.Find (position.ToString ()).transform);
 		PlayKnockSound ();
 	}
-	
-
 
 	private IEnumerator MoveAndBackToPosition(Position position){
 		float speed = 1f;
