@@ -31,25 +31,43 @@ public class SquareBehaviour : MonoBehaviour {
 	public void UnSelect(){
 		if(spriteRenderer != null) //Avoid null reference errors if spriteRender is not initialized
 			spriteRenderer.color = baseColor;
+		if (transform.childCount > 0) 
+			transform.GetChild (0).GetComponent<PieceBehaviour> ().SetStroke (false);
 	}
 
 	public void Select(){
 		if(spriteRenderer != null) //Avoid null reference errors if spriteRender is not initialized
 			spriteRenderer.color = GeneralTools.Hex.ToColor("F7FE82");
+		if (transform.childCount > 0) 
+			print ("HAS PIECE");//transform.GetChild (0).GetComponent<PieceBehaviour> ().SetStroke (true);
 
 	}
 
 	public void Select(Color color){
 		if(spriteRenderer != null) //Avoid null reference errors if spriteRender is not initialized
 			spriteRenderer.color = color;
+		if (transform.childCount > 0) 
+			print ("HAS PIECE");//transform.GetChild (0).GetComponent<PieceBehaviour> ().SetStroke (true);
+		
 	}
 
 	void OnMouseEnter(){
-		if(BoardController.isGameRunning)
+		if (BoardController.isGameRunning) {
 			BoardController.SetHighlightSquare (position);
+			if (transform.childCount > 0) 
+				transform.GetChild (0).GetComponent<PieceBehaviour> ().SetStroke (true);
+		}
+
+
 	}
 
+
+
 	void OnMouseDown(){
+		#if UNITY_IPHONE
+		OnMouseEnter();
+		#endif
+
 		if(BoardController.isGameRunning)
 			BoardController.Click (position);
 	}
