@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Controller\GenerateLifeBars.cs" />
      <Compile Include="Assets\Scripts\Controller\LifeBarBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\LightiningController.cs" />
+     <Compile Include="Assets\Scripts\Controller\MenuController.cs" />
      <Compile Include="Assets\Scripts\Controller\MoveGUICloud.cs" />
      <Compile Include="Assets\Scripts\Controller\PieceBehaviour.cs" />
      <Compile Include="Assets\Scripts\Controller\PieceSpawner.cs" />

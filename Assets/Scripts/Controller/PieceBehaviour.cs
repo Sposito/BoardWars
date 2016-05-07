@@ -47,7 +47,7 @@ public class PieceBehaviour : MonoBehaviour {
 	}
 
 	private void LoadSprites(){
-		piecesSSMap = new SpritesheetMap("Sprites/pieces");
+		piecesSSMap = new SpritesheetMap("Sprites/piecesSSS");
 		contourSSMap = new SpritesheetMap("Sprites/piecesCountourFX");
 	}
 

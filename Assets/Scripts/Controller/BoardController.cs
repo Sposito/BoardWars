@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 enum States{PRESELECTION, PIECECHOICE, TARGETCHOICE,POSELECTION}
-public class BoardController : MonoBehaviour {
+public class BoardController : NetworkBehaviour {
 	#region GlobalVariables
 	static SquareBehaviour[] squares;
 	static BoardMap map;
