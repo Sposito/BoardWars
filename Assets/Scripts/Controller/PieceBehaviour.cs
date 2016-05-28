@@ -38,8 +38,12 @@ public class PieceBehaviour : MonoBehaviour {
 	void SetPlayersColors(){
 		playersColor [0] = Hex.ToColor ("B5677E");
 		playersColor [1] = Hex.ToColor ("677EB5");
-		playersColor [2] = Hex.ToColor ("69B89F");
+		playersColor [2] = Hex.ToColor ("BCE299");
 		playersColor [3] = Hex.ToColor ("B59C67");
+	}
+
+	public Color GetPlayerColor(){
+		return playersColor [(int)player];
 	}
 
 	public void SetPieceKind(ItemKind kind){
@@ -60,6 +64,8 @@ public class PieceBehaviour : MonoBehaviour {
 		string detailName = pieceKind.ToString() + "_Detail";
 		string outlineName = pieceKind.ToString() + "_Outline";
 		string glowName = pieceKind.ToString() + "_Glow";
+
+		DefineColors ();
 		GetComponent<SpriteRenderer> ().color = playersColor [(int) player];
 	
 		transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = piecesSSMap.GetByName (baseName);
@@ -69,9 +75,11 @@ public class PieceBehaviour : MonoBehaviour {
 		transform.GetChild(2).GetComponent<SpriteRenderer> ().sprite = contourSSMap.GetByName (outlineName);
 		transform.GetChild (2).gameObject.SetActive (false);
 
+	}
 
-
-
+	void DefineColors(){
+		detailColor = piece.GetCore ().color;
+		baseColor = piece.GetShell ().color;
 	}
 
 	public void SetStroke(bool isStroked){

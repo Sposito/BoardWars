@@ -25,6 +25,14 @@ public class Piece: Item  {
 		return name;
 	}
 
+	public Item GetShell(){
+		return shell;
+	}
+
+	public Item GetCore(){
+		return core;
+	}
+
 	public int GetTotalHP(){
 		return totalHp;
 	}
@@ -144,13 +152,13 @@ public class Piece: Item  {
 			break;
 		}
 
-		Piece piece = new Piece(name, kind,player,hp,attack,Item.PineWood(),Item.PineWood(), new Enchantment() );
+		Piece piece = new Piece(name, kind,player,hp,attack,Item.BlackSteel(),Item.PineWood(), new Enchantment() );
 		piece.SetPosition (x, y);
 		return piece;
 	}
 
 	public static Piece BuildStadardIcePiece(ItemKind kind, Player player, int x, int y){
-		string name = "Pine Wood " + kind.ToString ();
+		string name = "Ice " + kind.ToString ();
 		int hp;
 		int attack;
 
@@ -193,7 +201,155 @@ public class Piece: Item  {
 			break;
 		}
 
-		Piece piece = new Piece(name, kind,player,hp,attack,Item.PineWood(),Item.PineWood(), new Enchantment() );
+		Piece piece = new Piece(name, kind,player,hp,attack,Item.BlackSteel(),Item.Ice(), new Enchantment() );
+		piece.SetPosition (x, y);
+		return piece;
+	}
+
+	public static Piece BuildStadardRedWaxPiece(ItemKind kind, Player player, int x, int y){
+		string name = "Red Wax " + kind.ToString ();
+		int hp;
+		int attack;
+
+		switch (kind) {
+		case ItemKind.KING:
+			hp = 1;
+			attack = 1;
+			kind = ItemKind.KING;
+			break;
+		case ItemKind.KNIGHT:
+			hp = 3;
+			attack = 2;
+			kind = ItemKind.KNIGHT;
+			break;
+		case ItemKind.MAGE:
+			hp = 2;
+			attack = 3;
+			kind = ItemKind.MAGE;
+			break;
+		case ItemKind.ROOK:
+			hp = 4;
+			attack = 1;
+			kind = ItemKind.ROOK;
+			break;
+		case ItemKind.PAWN:
+			hp = 1;
+			attack = 1;
+			kind = ItemKind.PAWN;
+			break;
+		case ItemKind.QUEEN:
+			hp = 3;
+			attack = 3;
+			kind = ItemKind.QUEEN;
+			break;
+
+		default:
+			hp = 1;
+			attack = 1;
+			Debug.LogError ("Invalid Kind");
+			break;
+		}
+
+		Piece piece = new Piece(name, kind,player,hp,attack,Item.BlackSteel(),Item.RedWax(), new Enchantment() );
+		piece.SetPosition (x, y);
+		return piece;
+	}
+
+	public static Piece BuildStadardGreenWaxPiece(ItemKind kind, Player player, int x, int y){
+		string name = "Green Wax " + kind.ToString ();
+		int hp;
+		int attack;
+
+		switch (kind) {
+		case ItemKind.KING:
+			hp = 1;
+			attack = 1;
+			kind = ItemKind.KING;
+			break;
+		case ItemKind.KNIGHT:
+			hp = 3;
+			attack = 2;
+			kind = ItemKind.KNIGHT;
+			break;
+		case ItemKind.MAGE:
+			hp = 2;
+			attack = 3;
+			kind = ItemKind.MAGE;
+			break;
+		case ItemKind.ROOK:
+			hp = 4;
+			attack = 1;
+			kind = ItemKind.ROOK;
+			break;
+		case ItemKind.PAWN:
+			hp = 1;
+			attack = 1;
+			kind = ItemKind.PAWN;
+			break;
+		case ItemKind.QUEEN:
+			hp = 3;
+			attack = 3;
+			kind = ItemKind.QUEEN;
+			break;
+
+		default:
+			hp = 1;
+			attack = 1;
+			Debug.LogError ("Invalid Kind");
+			break;
+		}
+
+		Piece piece = new Piece(name, kind,player,hp,attack,Item.BlackSteel(),Item.GreenWax(), new Enchantment() );
+
+		piece.SetPosition (x, y);
+		return piece;
+	}
+
+	public static Piece BuildStadardBeeWaxPiece(ItemKind kind, Player player, int x, int y){
+		string name = "Bee Wax " + kind.ToString ();
+		int hp;
+		int attack;
+
+		switch (kind) {
+		case ItemKind.KING:
+			hp = 1;
+			attack = 1;
+			kind = ItemKind.KING;
+			break;
+		case ItemKind.KNIGHT:
+			hp = 3;
+			attack = 2;
+			kind = ItemKind.KNIGHT;
+			break;
+		case ItemKind.MAGE:
+			hp = 2;
+			attack = 3;
+			kind = ItemKind.MAGE;
+			break;
+		case ItemKind.ROOK:
+			hp = 4;
+			attack = 1;
+			kind = ItemKind.ROOK;
+			break;
+		case ItemKind.PAWN:
+			hp = 1;
+			attack = 1;
+			kind = ItemKind.PAWN;
+			break;
+		case ItemKind.QUEEN:
+			hp = 3;
+			attack = 3;
+			kind = ItemKind.QUEEN;
+			break;
+
+		default:
+			hp = 1;
+			attack = 1;
+			Debug.LogError ("Invalid Kind");
+			break;
+		}
+
+		Piece piece = new Piece(name, kind,player,hp,attack,Item.BlackSteel(),Item.BeeWax(), new Enchantment() );
 		piece.SetPosition (x, y);
 		return piece;
 	}

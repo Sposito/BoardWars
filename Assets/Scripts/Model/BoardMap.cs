@@ -240,7 +240,7 @@ public class BoardMap {
 		case Directions.S:
 			pos1.Move (Directions.SE);
 			pos2.Move (Directions.SW);
-			break;;
+			break;
 		case Directions.E:
 			pos1.Move (Directions.NE);
 			pos2.Move (Directions.SE);

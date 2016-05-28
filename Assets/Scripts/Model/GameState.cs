@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameState : IEnumerable<Piece> {
-
+	
 	protected Piece[] pieces;
 	protected Board board;
 	protected Player currentPlayer;
@@ -15,9 +15,11 @@ public class GameState : IEnumerable<Piece> {
 	private Position targetPosition; 
 
 	protected bool[] activePlayers;
-	public GameState(){ // provisory contructor
-	
-	}
+
+	protected bool isTeamGame = true;
+	protected Team currentTeam = Team.A;
+
+	public static int  skipcounter = 2;
 
 	public IEnumerator<Piece> GetEnumerator(){
 		List<Piece> list = new List<Piece> (pieces);
@@ -28,9 +30,10 @@ public class GameState : IEnumerable<Piece> {
 		return GetEnumerator ();
 	}
 
-	public GameState(Piece[] pieces, Player currentPlayer, float time, Position actorPosition, Position targetPosition){
+	public GameState(Piece[] pieces, Player currentPlayer,Team currentTeam, float time, Position actorPosition, Position targetPosition){
 		this.pieces = pieces;
 		this.currentPlayer = currentPlayer;
+		this.currentTeam = currentTeam;
 		this.time = time;
 
 		this.actorPosition = actorPosition;
@@ -46,6 +49,7 @@ public class GameState : IEnumerable<Piece> {
 	public GameState(GameState g){
 		this.pieces = g.pieces;
 		this.currentPlayer = g.currentPlayer;
+		this.currentTeam = g.currentTeam;
 		this.time = g.time;
 
 		this.actorPosition = g.actorPosition;
@@ -87,6 +91,26 @@ public class GameState : IEnumerable<Piece> {
 	}
 
 	public void NextPlayer(){ //TODO: WARNING!!! IF FOR SOME REASON ALL THE KINGS DIE AT ONCE IT WILL CRASH in an infinite loop!!!
+		if (!isTeamGame) {
+			Next ();
+		} 
+
+		else {
+			NextTeam ();
+
+		}
+		
+	}
+
+	void SimpleNext(){
+		if ((int)currentPlayer < 3)
+			currentPlayer++;
+		else
+			currentPlayer = Player.PLAYER1;
+
+	}
+
+	void Next(){
 		if ((int)currentPlayer < 3)
 			currentPlayer++;
 		else
@@ -95,6 +119,28 @@ public class GameState : IEnumerable<Piece> {
 		if (!activePlayers [(int)currentPlayer]) {
 			NextPlayer ();
 		}
+	}
+	void NextTeam(){
+
+		if ((int)currentPlayer < 3)
+			currentPlayer++;
+		else
+			currentPlayer = Player.PLAYER1;
+
+		if (!activePlayers [(int)currentPlayer]) {
+			SimpleNext ();
+			SimpleNext ();
+		}
+
+	}
+
+
+
+	private Team CheckPlayersTeam(Player player){
+		return ((int)player % 2 == 0) ? Team.A : Team.B; 
+	} 
+	private bool IsConsecutiveTeam(Player last, Player current ){
+		return ((int)last + (int)current)   % 2 == 0;
 	}
 
 	public void MovePiece(Position oldPosition, Position newPosition, bool destroy){

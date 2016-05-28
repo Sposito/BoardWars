@@ -37,8 +37,10 @@ public class MovementBehaviour  {
 			case ItemKind.PAWN:
 				BoardMap enemiesMap = BoardController.GetEnemiesMap (piece.GetPlayer ());
 				map = BoardMap.DiagonalAhead (position, player);
+				map.Add ( BoardMap.DiagonalAhead (position, GetComplementarPlayer(player) ));
 				map.Intersect (enemiesMap);
 				BoardMap map2 = BoardMap.Ahead (position, player );
+				map2.Add ( BoardMap.Ahead (position, GetComplementarPlayer(player) ));
 				map2.Remove (enemiesMap);
 				map.Add (map2);
 				break;
@@ -52,6 +54,26 @@ public class MovementBehaviour  {
 		}
 		}
 
-
+	Player GetComplementarPlayer(Player player){
+		Player p = player;
+		switch (player){
+		case Player.PLAYER1:
+			p = Player.PLAYER4;
+			break;
+		case Player.PLAYER2:
+			p = Player.PLAYER1;
+			break;
+		case Player.PLAYER3:
+			p = Player.PLAYER2;
+			break;
+		case Player.PLAYER4:
+			p = Player.PLAYER3;
+			break;
+		default:
+			Debug.LogWarning ("Invalid Player");
+			break;
+		}
+		return p;
+	}
 
 }

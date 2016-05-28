@@ -31,12 +31,14 @@ public class LifeBarBehaviour : MonoBehaviour {
 			position = piece.GetPosition ();
 		}
 
-		BuildBar (position);
+
 		transform.position = position.ToScenePosition () + offset;
 		pieceToFollow = GameObject.Find (position.ToString ()).transform.GetChild (0).gameObject;
 		lastHP = totalHP;
 		transform.localScale = new Vector3 (-1f, 1f, 1f);
 		pieceBehaviour = pieceToFollow.GetComponent<PieceBehaviour> ();
+		barGO.GetComponent<Image> ().color = pieceBehaviour.GetPlayerColor();
+		BuildBar (position);
 	}
 	
 	public void BuildBar(Position pos){

@@ -76,7 +76,6 @@
      <Compile Include="Assets\Scripts\Model\GameController.cs" />
      <Compile Include="Assets\Scripts\Model\GameState.cs" />
      <Compile Include="Assets\Scripts\Model\Hex.cs" />
-     <Compile Include="Assets\Scripts\Model\InitialGameStateBuilder.cs" />
      <Compile Include="Assets\Scripts\Model\InitialStateBuilder.cs" />
      <Compile Include="Assets\Scripts\Model\Item.cs" />
      <Compile Include="Assets\Scripts\Model\MovementBehaviour.cs" />

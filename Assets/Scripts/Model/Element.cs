@@ -16,7 +16,7 @@ public class Element  {
 		case Elements.METAL:
 			return Hex.ToColor ("C3C2BE");
 		case Elements.EARTH:
-			return Hex.ToColor ("5D371D");
+			return Hex.ToColor ("D5CB5B");
 		default:
 			return Color.grey;
 		}
