@@ -6,6 +6,8 @@ public class BreathBehaviour : MonoBehaviour {
 	Transform t1;
 	Transform t2;
 
+
+
 	float cycleCounter;
 	void Start () {
 		t1 = transform.GetChild (0);
@@ -19,7 +21,7 @@ public class BreathBehaviour : MonoBehaviour {
 		if (cycleCounter > 360f * Mathf.Deg2Rad)
 			cycleCounter -= 360f * Mathf.Deg2Rad;
 
-		t1.localScale = new Vector3(1f, (1 + Mathf.Sin (cycleCounter) / 50),1f);
-		t2.localScale = new Vector3(1f, (1 + Mathf.Sin (cycleCounter) / 50),1f);
+		t1.localScale = new Vector3(1f, (1 + Mathf.Sin (cycleCounter) / 40),1f);
+		t2.localScale = new Vector3(1f, (1 + Mathf.Sin (cycleCounter) / 40),1f);
 	}
 }
