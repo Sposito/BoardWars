@@ -13,13 +13,13 @@ public class StatusPannelController : MonoBehaviour {
 	Image playerBanner;
 	// Use this for initialization
 	void Start () {
-		nameText = transform.FindChild ("Name").GetComponent<Text> ();
-		attackText = transform.FindChild ("AttackText").GetComponent<Text> ();
+		nameText = transform.Find ("Name").GetComponent<Text> ();
+		attackText = transform.Find ("AttackText").GetComponent<Text> ();
 		defenseText = transform.Find ("DefenseText").GetComponent<Text> ();
-		elementCoreIcon = transform.FindChild ("Element Atk").GetComponent<Image> ();
-		elementShellIcon = transform.FindChild ("Element Def").GetComponent<Image> ();
-		elementCoreText = transform.FindChild ("Core Text").GetComponent<Text> ();
-		elementShellText = transform.FindChild ("Shell Text").GetComponent<Text> ();
+		elementCoreIcon = transform.Find ("Element Atk").GetComponent<Image> ();
+		elementShellIcon = transform.Find ("Element Def").GetComponent<Image> ();
+		elementCoreText = transform.Find ("Core Text").GetComponent<Text> ();
+		elementShellText = transform.Find ("Shell Text").GetComponent<Text> ();
 		currentPlayer = GameObject.Find("CurrentPlayer").GetComponent<Text> ();
 		playerBanner = GameObject.Find("PlayerBanner").GetComponent<Image> ();
 

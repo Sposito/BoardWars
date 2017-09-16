@@ -18,8 +18,8 @@ public class LightiningController : MonoBehaviour {
 
 	void Start () {
 		//Start will basically define the variables values in the beggining of game
-		volumetric1 = transform.FindChild("VolumetricLightsPhase1").GetComponent<SpriteRenderer>();
-		volumetric2 = transform.FindChild("VolumetricLightsPhase2").GetComponent<SpriteRenderer>();
+		volumetric1 = transform.Find("VolumetricLightsPhase1").GetComponent<SpriteRenderer>();
+		volumetric2 = transform.Find("VolumetricLightsPhase2").GetComponent<SpriteRenderer>();
 		v1Color = volumetric1.color;
 		v2Color = volumetric2.color;
 		transparent = new Color (.78f, .7f, .67f, .3f);
